@@ -10,7 +10,7 @@ concurrency:
 jobs:
   gh-pages-deploy:
     environment:
-      name: github-pages
+      name: github-pages-gooboo
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
