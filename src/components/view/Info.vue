@@ -25,6 +25,7 @@
         <span v-if="isTestingVersion">-{{ $vuetify.lang.t('$vuetify.info.testing') }}</span>
       </v-card-title>
       <v-card-subtitle class="text-center">{{ $vuetify.lang.t('$vuetify.info.subtitle') }}</v-card-subtitle>
+      <v-card-subtitle class="text-center">{{ $vuetify.lang.t('$vuetify.info.mods') }}</v-card-subtitle>
       <v-card-text>
         <div class="mb-2">{{ $vuetify.lang.t('$vuetify.info.text') }}</div>
         <div v-if="appEnv === 'desktop' || appEnv === 'offline'">
