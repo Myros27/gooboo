@@ -291,6 +291,7 @@ export default {
   info: {
     title: 'Gooboo',
     subtitle: 'developed by Tendsty',
+    mods: 'Autoshapez by Myros',
     testing: 'testing',
     text: 'Gooboo is an idle / incremental game where you manage multiple features in a mysterious, unknown world. Gather different resources to buy a huge variety of upgrades to increase your resource gains. Progress in your main features to unlock new content and learn more about this world. And when progression starts slowing down, prestige individual features to take your gains to the next level.',
     updates: {
