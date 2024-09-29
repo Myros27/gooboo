@@ -3,14 +3,18 @@
     push:
       branches:
         - main
+  permissions:
+    contents: read
+    pages: write
+    id-token: write
   jobs:
     gh-pages-deploy:
       name: Deploying to Github Pages
       runs-on: ubuntu-latest
       steps:
+          - name: checkout
           - uses: actions/checkout@v2
-            with:
-              token: ${{ secrets.PAGES_TOKEN }}
+          - name: setup-node
           - uses: actions/setup-node@v2
             with:
               node-version: '16'
