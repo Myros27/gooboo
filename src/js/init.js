@@ -81,7 +81,7 @@ function loadGame(file, runPrepare = true) {
         
             //TODO Find a better place for that stuff to live
             var enableAutomation = null;
-
+// eslint-disable-next-line no-inner-declarations
             function doNextMove(){
                 let modGrid = document.getElementById("app").__vue__.$store.state.gallery.shapeGrid
                 let modMostFrequentElement = findMostCommon(modGrid)
@@ -97,7 +97,7 @@ function loadGame(file, runPrepare = true) {
                 document.getElementById("app").__vue__.$store.dispatch('gallery/switchShape', {fromX: modResult[0][1], fromY: modResult[0][0], toX: modResult[1][1], toY: modResult[1][0]})
                 console.log(`Moved ${modMostFrequentElement} from (${modResult[0][0]}, ${modResult[0][1]}) to (${modResult[1][0]}, ${modResult[1][1]})`);
             }
-            
+            // eslint-disable-next-line no-inner-declarations   
             function findMostCommon(modGrid) {
                 const frequency = {};
                 for (const row of modGrid) {
@@ -109,17 +109,17 @@ function loadGame(file, runPrepare = true) {
                 const mostCommon = Object.keys(frequency).filter(key => frequency[key] === maxCount).sort().shift();
                 return mostCommon;
             }
-            
+            // eslint-disable-next-line no-inner-declarations
             function modShapesTouch(modShape, modGrid) {
                 const rows = modGrid.length;
                 const cols = modGrid[0].length;
                 const visited = Array.from({ length: rows }, () => Array(cols).fill(false));
                 const shapes = modShape.split(',').map(shape => shape.trim());
-                
+                // eslint-disable-next-line no-inner-declarations
                 function isInBounds(x, y) {
                     return x >= 0 && x < rows && y >= 0 && y < cols;
                 }
-            
+            // eslint-disable-next-line no-inner-declarations
                 function dfs(x, y, shape) {
                     if (!isInBounds(x, y) || visited[x][y] || modGrid[x][y] !== shape) {
                         return;
@@ -161,7 +161,7 @@ function loadGame(file, runPrepare = true) {
             
                 return [coX,coY];
             }
-            
+            // eslint-disable-next-line no-inner-declarations
             function findClosestShapePosition(modShape, modGrid) {
                 const rows = modGrid.length;
                 const cols = modGrid[0].length;
@@ -197,7 +197,7 @@ function loadGame(file, runPrepare = true) {
             
                 return closestPosition;
             }
-            
+            // eslint-disable-next-line no-inner-declarations
             function findConnectedShapes(modShape, modGrid, modOrigin) {
                 const rows = modGrid.length;
                 const cols = modGrid[0].length;
@@ -210,11 +210,11 @@ function loadGame(file, runPrepare = true) {
                 if (modGrid[startX][startY] !== modShape) {
                     return [];
                 }
-            
+            // eslint-disable-next-line no-inner-declarations
                 function isInBounds(x, y) {
                     return x >= 0 && x < rows && y >= 0 && y < cols;
                 }
-            
+            // eslint-disable-next-line no-inner-declarations
                 function dfs(x, y) {
                     if (!isInBounds(x, y) || visited[x][y] || modGrid[x][y] !== modShape) {
                         return;
@@ -230,12 +230,12 @@ function loadGame(file, runPrepare = true) {
                 dfs(startX, startY);
                 return positions;
             }
-            
+            // eslint-disable-next-line no-inner-declarations
             function moveClosestNonGoalShapeToGoal(modShape, modGrid, modGoalArea, modOrigin) {
                 const rows = modGrid.length;
                 const cols = modGrid[0].length;
                 const shapePositions = [];
-                // eslint-disable-next-line no-unused-vars
+                // eslint-disable-next-line no-unused-vars no-inner-declarations
                 function isInBounds(x, y, rows, cols) {
                     return x >= 0 && x < rows && y >= 0 && y < cols;
                 }
@@ -291,11 +291,11 @@ function loadGame(file, runPrepare = true) {
             
                 return [[fromX, fromY], [toX, toY]];
             }
-            
+            // eslint-disable-next-line no-inner-declarations
             function sleep(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
-            
+            // eslint-disable-next-line no-inner-declarations
             async function runWithDelay() {
                 // eslint-disable-next-line no-constant-condition
                 while (true) {
@@ -319,7 +319,7 @@ function loadGame(file, runPrepare = true) {
                     }
                 }
             }
-            
+            // eslint-disable-next-line no-inner-declarations
             function changeState(){
                 if (enableAutomation === null || enableAutomation === false){
                     enableAutomation = true
@@ -331,7 +331,7 @@ function loadGame(file, runPrepare = true) {
                     document.getElementById("modSymbol").classList.add("mdi-play");
                 }
             }
-            
+            // eslint-disable-next-line no-inner-declarations
             function createButton(){
                 if (document.getElementById("automationStart") === null){
                     let tableFinder = document.getElementsByTagName("table")
@@ -345,7 +345,7 @@ function loadGame(file, runPrepare = true) {
                     }
                 }
             }
-            
+            // eslint-disable-next-line no-inner-declarations
             async function modInit(){
                 let level = document.getElementById("app").__vue__.$store.state.system.cheaterSelfMark
                 if (level === 0){
