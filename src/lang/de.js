@@ -1257,6 +1257,30 @@ export default {
         name: 'Zeige Währungsschilder',
         description: 'Währungseinkommen und Zeit bis zur Kapazität werden ohne Herüberfahren mit der Maus angezeigt'
       }
+    },
+    mods_qol: {
+      name: 'Mods QOL',
+      progressNiterMiningSound: {
+        name: 'Sound at X times broken'
+      },
+      progressNiterMiningActiveSound: {
+        name: 'Enable Sound'
+      }
+    },
+    mods_automation: {
+      name: 'Mods automation',
+      progressNiterMining: {
+        name: 'Nitermining autoprogress at X times broken',
+      },
+      progressNiterMiningActive: {
+        name: 'Enable nitermining autoprogress'
+      }
+    },
+    mods_cheats: {
+      name: 'Mods cheats',
+      cheatsGo: {
+        name: 'TestSwitch',
+      }
     }
   },
   statBreakdown: {
