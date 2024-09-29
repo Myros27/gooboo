@@ -167,7 +167,7 @@ function decodeFile(file, showErrors = true) {
         if (showErrors) {
             store.commit('system/addNotification', {color: APP_TESTING ? 'warning' : 'error', timeout: -1, message: {
                 type: 'import',
-                error: 'checksum'
+                error: 'expected checksum ' + simpleHash(JSON.stringify(rawFile)) + ', but received ' file.checksum + '.'
             }});
         }
         if (!APP_TESTING) {
