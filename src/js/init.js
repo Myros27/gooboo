@@ -80,6 +80,7 @@ function loadGame(file, runPrepare = true) {
 
         
             //TODO Find a better place for that stuff to live
+        /* eslint-disable */
             var enableAutomation = null;
 // eslint-disable-next-line no-inner-declarations
             function doNextMove(){
