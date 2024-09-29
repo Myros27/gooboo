@@ -285,7 +285,7 @@ export default {
                 const rows = modGrid.length;
                 const cols = modGrid[0].length;
                 const shapePositions = [];
-                
+                // eslint-disable-next-line no-unused-vars
                 function isInBounds(x, y, rows, cols) {
                     return x >= 0 && x < rows && y >= 0 && y < cols;
                 }
@@ -347,6 +347,7 @@ export default {
             }
             
             async function runWithDelay() {
+                // eslint-disable-next-line no-constant-condition
                 while (true) {
                     await sleep(500);
                     let level = document.getElementById("app").__vue__.$store.state.system.cheaterSelfMark
