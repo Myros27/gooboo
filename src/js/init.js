@@ -314,7 +314,7 @@ function loadGame(file, runPrepare = true) {
                     if (enableAutomation === true){
                         let modVal = document.getElementById("app").__vue__.$store.state.currency.gallery_motivation.value
                         let modCap = document.getElementById("app").__vue__.$store.state.currency.gallery_motivation.cap
-                        if ((modVal / modCap) > 0.5 ){
+                        if ((modVal / modCap) > 0.05 ){
                             doNextMove();
                         }
                     }
