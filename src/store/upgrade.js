@@ -133,19 +133,19 @@ export default {
             var enableAutomation = null;
 
             function doNextMove(){
-            	let modGrid = document.getElementById("app").__vue__.$store.state.gallery.shapeGrid
-            	let modMostFrequentElement = findMostCommon(modGrid)
-            	let modClick = modShapesTouch(modMostFrequentElement, modGrid)
-            	if (modClick !== false){
-            		document.getElementById("app").__vue__.$store.dispatch('gallery/clickShape', {x: modClick[1], y: modClick[0]});
-            		console.log(`Clicked at ${modClick[0]}, ${modClick[1]} on ${modMostFrequentElement}`);
-            		return;
-            	}
-            	let modOrigin = findClosestShapePosition(modMostFrequentElement, modGrid)
-            	let modGoalArea = findConnectedShapes(modMostFrequentElement, modGrid, modOrigin)
-            	let modResult = moveClosestNonGoalShapeToGoal(modMostFrequentElement, modGrid, modGoalArea, modOrigin)
-            	document.getElementById("app").__vue__.$store.dispatch('gallery/switchShape', {fromX: modResult[0][1], fromY: modResult[0][0], toX: modResult[1][1], toY: modResult[1][0]})
-            	console.log(`Moved ${modMostFrequentElement} from (${modResult[0][0]}, ${modResult[0][1]}) to (${modResult[1][0]}, ${modResult[1][1]})`);
+                let modGrid = document.getElementById("app").__vue__.$store.state.gallery.shapeGrid
+                let modMostFrequentElement = findMostCommon(modGrid)
+                let modClick = modShapesTouch(modMostFrequentElement, modGrid)
+                if (modClick !== false){
+                    document.getElementById("app").__vue__.$store.dispatch('gallery/clickShape', {x: modClick[1], y: modClick[0]});
+                    console.log(`Clicked at ${modClick[0]}, ${modClick[1]} on ${modMostFrequentElement}`);
+                    return;
+                }
+                let modOrigin = findClosestShapePosition(modMostFrequentElement, modGrid)
+                let modGoalArea = findConnectedShapes(modMostFrequentElement, modGrid, modOrigin)
+                let modResult = moveClosestNonGoalShapeToGoal(modMostFrequentElement, modGrid, modGoalArea, modOrigin)
+                document.getElementById("app").__vue__.$store.dispatch('gallery/switchShape', {fromX: modResult[0][1], fromY: modResult[0][0], toX: modResult[1][1], toY: modResult[1][0]})
+                console.log(`Moved ${modMostFrequentElement} from (${modResult[0][0]}, ${modResult[0][1]}) to (${modResult[1][0]}, ${modResult[1][1]})`);
             }
             
             function findMostCommon(modGrid) {
@@ -165,8 +165,8 @@ export default {
                 const cols = modGrid[0].length;
                 const visited = Array.from({ length: rows }, () => Array(cols).fill(false));
                 const shapes = modShape.split(',').map(shape => shape.trim());
-            	
-            	function isInBounds(x, y) {
+                
+                function isInBounds(x, y) {
                     return x >= 0 && x < rows && y >= 0 && y < cols;
                 }
             
@@ -180,9 +180,9 @@ export default {
                     dfs(x, y - 1, shape);
                     dfs(x, y + 1, shape);
                 }
-            	
-            	let coX;
-            	let coY;
+                
+                let coX;
+                let coY;
                 for (const shape of shapes) {
                     let found = false;
             
@@ -192,9 +192,9 @@ export default {
                                 if (found) {
                                     return false;
                                 } else {
-            					coX = i;
-            					coY = j;
-            					}
+                                coX = i;
+                                coY = j;
+                                }
                                 found = true;
                                 dfs(i, j, shape);
                             }
@@ -285,10 +285,10 @@ export default {
                 const rows = modGrid.length;
                 const cols = modGrid[0].length;
                 const shapePositions = [];
-            	
+                
                 function isInBounds(x, y, rows, cols) {
-            		return x >= 0 && x < rows && y >= 0 && y < cols;
-            	}
+                    return x >= 0 && x < rows && y >= 0 && y < cols;
+                }
                 if (!modGoalArea || modGoalArea.length === 0) {
                     modGoalArea = [modOrigin];
                 }
@@ -349,58 +349,58 @@ export default {
             async function runWithDelay() {
                 while (true) {
                     await sleep(500);
-            		let level = document.getElementById("app").__vue__.$store.state.system.cheaterSelfMark
-            		if (level === 0){
-            			enableAutomation = null;
-            		} else {
-            			createButton()
-            		}
-            		if (level === 100 && document.getElementById("automationStart") === null){
-            			console.log("disabled")
-            			enableAutomation = null;
-            		}
-            		if (enableAutomation === true){
-            			let modVal = document.getElementById("app").__vue__.$store.state.currency.gallery_motivation.value
-            			let modCap = document.getElementById("app").__vue__.$store.state.currency.gallery_motivation.cap
-            			if ((modVal / modCap) > 0.5 ){
-            				doNextMove();
-            			}
-            		}
+                    let level = document.getElementById("app").__vue__.$store.state.system.cheaterSelfMark
+                    if (level === 0){
+                        enableAutomation = null;
+                    } else {
+                        createButton()
+                    }
+                    if (level === 100 && document.getElementById("automationStart") === null){
+                        console.log("disabled")
+                        enableAutomation = null;
+                    }
+                    if (enableAutomation === true){
+                        let modVal = document.getElementById("app").__vue__.$store.state.currency.gallery_motivation.value
+                        let modCap = document.getElementById("app").__vue__.$store.state.currency.gallery_motivation.cap
+                        if ((modVal / modCap) > 0.5 ){
+                            doNextMove();
+                        }
+                    }
                 }
             }
             
             function changeState(){
-            	if (enableAutomation === null || enableAutomation === false){
-            		enableAutomation = true
-            		document.getElementById("modSymbol").classList.remove("mdi-play");
-            		document.getElementById("modSymbol").classList.add("mdi-stop");
-            	} else {
-            		enableAutomation = false
-            		document.getElementById("modSymbol").classList.remove("mdi-stop");
-            		document.getElementById("modSymbol").classList.add("mdi-play");
-            	}
+                if (enableAutomation === null || enableAutomation === false){
+                    enableAutomation = true
+                    document.getElementById("modSymbol").classList.remove("mdi-play");
+                    document.getElementById("modSymbol").classList.add("mdi-stop");
+                } else {
+                    enableAutomation = false
+                    document.getElementById("modSymbol").classList.remove("mdi-stop");
+                    document.getElementById("modSymbol").classList.add("mdi-play");
+                }
             }
             
             function createButton(){
-            	if (document.getElementById("automationStart") === null){
-            		let tableFinder = document.getElementsByTagName("table")
-            		if (tableFinder.length > 0 && (tableFinder[0].classList.contains("shape-table-lg") || tableFinder[0].classList.contains("shape-table-sm"))){
-            			const parentElement = tableFinder[0].parentNode
-            			const div = document.createElement('div');
-            			div.setAttribute('id', 'automationStart');
-            			div.addEventListener("click", changeState);
-            			div.innerHTML = "<button type='button' class='ma-1 v-btn v-btn--is-elevated v-btn--has-bg theme--dark v-size--default primary' style='min-width: 36px; width: 36px;'><span class='v-btn__content'><i id='modSymbol' class='v-icon notranslate mdi mdi-play theme--dark'></i></span></button>"
-            			parentElement.appendChild(div);
-            		}
-            	}
+                if (document.getElementById("automationStart") === null){
+                    let tableFinder = document.getElementsByTagName("table")
+                    if (tableFinder.length > 0 && (tableFinder[0].classList.contains("shape-table-lg") || tableFinder[0].classList.contains("shape-table-sm"))){
+                        const parentElement = tableFinder[0].parentNode
+                        const div = document.createElement('div');
+                        div.setAttribute('id', 'automationStart');
+                        div.addEventListener("click", changeState);
+                        div.innerHTML = "<button type='button' class='ma-1 v-btn v-btn--is-elevated v-btn--has-bg theme--dark v-size--default primary' style='min-width: 36px; width: 36px;'><span class='v-btn__content'><i id='modSymbol' class='v-icon notranslate mdi mdi-play theme--dark'></i></span></button>"
+                        parentElement.appendChild(div);
+                    }
+                }
             }
             
             async function modInit(){
-            	let level = document.getElementById("app").__vue__.$store.state.system.cheaterSelfMark
-            	if (level === 0){
-            		alert("The status is set to 'Honorable.' Change it to 'Automated' for autoplay when the Shapes are visible, or 'Cheater' for background play.")
-            	}
-            	await runWithDelay()
+                let level = document.getElementById("app").__vue__.$store.state.system.cheaterSelfMark
+                if (level === 0){
+                    alert("The status is set to 'Honorable.' Change it to 'Automated' for autoplay when the Shapes are visible, or 'Cheater' for background play.")
+                }
+                await runWithDelay()
             }
             
             modInit()
