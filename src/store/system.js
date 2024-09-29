@@ -383,6 +383,66 @@ export default {
                         defaultValue: false
                     }
                 }
+            },
+            mods_qol: {
+                unlock: null,
+                items: {
+                    progressNiterMiningSound: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'number',
+                        min: 1,
+                        max: 1000000,
+                        step: 1,
+                        suffix: 'times',
+                        value: null,
+                        defaultValue: null,
+                        clearable: true
+                    },
+                    progressNiterMiningActiveSound: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    }
+                }
+            },
+            mods_automation: {
+                unlock: null,
+                items: {
+                    progressNiterMining: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'number',
+                        min: 1,
+                        max: 1000000,
+                        step: 1,
+                        suffix: 'times',
+                        value: null,
+                        defaultValue: null,
+                        clearable: true
+                    },
+                    progressNiterMiningActive: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    }
+                }
+            },
+            mods_cheats: {
+                unlock: null,
+                items: {
+                    cheatsGo: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    }
+                }
             }
         },
         keybinds: {
