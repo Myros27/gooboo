@@ -8,8 +8,37 @@ export default {
     unlockNeeded: 'achievementFeature',
     tick() {
         store.dispatch('achievement/check');
+        if (store.state.system.settings.mods_qol.items.progressNiterMiningActiveSound.value){
+            if (store.state.system.settings.mods_qol.items.progressNiterMiningSound.value !== null ){
+                if (store.state.mining.breaks[store.state.mining.depth - 1] > Number(store.state.system.settings.mods_qol.items.progressNiterMiningSound.value)){
+                    if (store.state.system.settings.mods_qol.items.progressNiterMiningSoundCache.value !== store.state.mining.depth){
+                        let audio = new Audio('https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3');
+                        audio.play();
+                        store.commit('system/registerCheat', {modid: 'autoNiterz', feature: 'mining', name: 'notify:playSound', severity: 0});
+                        store.state.system.settings.mods_qol.items.progressNiterMiningSoundCache.value = store.state.mining.depth
+                    }
+                }
+            }
+        }
+        if (store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeath.value){
+            if (store.state.horde.zone !== store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathZoneCache.value){
+                store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathZoneCache.value = store.state.horde.zone
+                store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathNumberCache.value = 0
+                store.commit('system/registerCheat', {modid: 'autoHordez', feature: 'horde', name: 'notify:showMaxEnemy', severity: 0});
+            } else {
+                store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathNumberCache.value = Math.max(store.state.horde.combo, store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathNumberCache.value)
+            }
+        }
+        if (store.state.system.settings.mods_automation.items.progressNiterMiningActive.value){
+            if (store.state.system.settings.mods_automation.items.progressNiterMining.value !== null ){
+                if (store.state.mining.breaks[store.state.mining.depth - 1] > Number(store.state.system.settings.mods_automation.items.progressNiterMining.value)){
+                    store.state.mining.depth++
+                    store.commit('system/registerCheat', {modid: 'autoNiterz', feature: 'mining', name: 'autoClick:advance', severity: 100});
+                }
+            }
+        }
     },
-    unlock: ['achievementFeature'],
+    unlock: ['achievementFeature', 'never', 'myros_automation', 'myros_cheats'],
     relic: {
         excavator: {icon: 'mdi-excavator', feature: ['achievement', 'mining'], color: 'orange', effect: [
             {name: 'currencyMiningScrapGain', type: 'mult', value: 2},

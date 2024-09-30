@@ -3,6 +3,7 @@ import { tick } from "../js/tick";
 import { randomHex } from "../js/utils/random";
 import seedrandom from "seedrandom";
 import { LOCAL_STORAGE_NAME } from "../js/constants";
+import store from "@/store/index";
 
 export default {
     namespaced: true,
@@ -387,6 +388,20 @@ export default {
             mods_qol: {
                 unlock: null,
                 items: {
+                    debugUnlockAutomation: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
+                    debugUnlockCheats: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
                     progressNiterMiningSound: {
                         unlock: null,
                         hasDescription: false,
@@ -395,8 +410,20 @@ export default {
                         max: 1000000,
                         step: 1,
                         suffix: 'times',
-                        value: null,
-                        defaultValue: null,
+                        value: 1000,
+                        defaultValue: 1000,
+                        clearable: true
+                    },
+                    progressNiterMiningSoundCache: {
+                        unlock: 'never',
+                        hasDescription: false,
+                        type: 'number',
+                        min: 1,
+                        max: 1000000,
+                        step: 1,
+                        suffix: 'times',
+                        value: 0,
+                        defaultValue: 0,
                         clearable: true
                     },
                     progressNiterMiningActiveSound: {
@@ -405,11 +432,42 @@ export default {
                         type: 'switch',
                         value: false,
                         defaultValue: false
-                    }
+                    },
+                    showMaxEnemiesBeforeDeath: {
+                        unlock: 'hordeFeature',
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
+                    showMaxEnemiesBeforeDeathZoneCache: {
+                        unlock: 'never',
+                        hasDescription: false,
+                        type: 'number',
+                        min: 1,
+                        max: 1000000,
+                        step: 1,
+                        suffix: 'times',
+                        value: 0,
+                        defaultValue: 0,
+                        clearable: true
+                    },
+                    showMaxEnemiesBeforeDeathNumberCache: {
+                        unlock: 'never',
+                        hasDescription: false,
+                        type: 'number',
+                        min: 1,
+                        max: 1000000,
+                        step: 1,
+                        suffix: 'times',
+                        value: 0,
+                        defaultValue: 0,
+                        clearable: true
+                    },
                 }
             },
             mods_automation: {
-                unlock: null,
+                unlock: 'myros_automation',
                 items: {
                     progressNiterMining: {
                         unlock: null,
@@ -419,8 +477,8 @@ export default {
                         max: 1000000,
                         step: 1,
                         suffix: 'times',
-                        value: null,
-                        defaultValue: null,
+                        value: 1000,
+                        defaultValue: 1000,
                         clearable: true
                     },
                     progressNiterMiningActive: {
@@ -433,7 +491,7 @@ export default {
                 }
             },
             mods_cheats: {
-                unlock: null,
+                unlock: 'myros_cheats',
                 items: {
                     cheatsGo: {
                         unlock: null,
@@ -931,6 +989,20 @@ export default {
             }
             if (o.category === 'notification' && o.name === 'cropReady') {
                 dispatch('farm/updateGrownHint', null, {root: true});
+            }
+            if (o.category === 'mods_qol' && o.name === 'debugUnlockAutomation') {
+                if (store.state.system.settings.mods_qol.items.debugUnlockAutomation.value) {
+                    store.commit('unlock/unlock', 'myros_automation')
+                } else {
+                    store.commit('unlock/lock', 'myros_automation')
+                }
+            }
+            if (o.category === 'mods_qol' && o.name === 'debugUnlockCheats') {
+                if (store.state.system.settings.mods_qol.items.debugUnlockCheats.value) {
+                    store.commit('unlock/unlock', 'myros_cheats')
+                } else {
+                    store.commit('unlock/lock', 'myros_cheats')
+                }
             }
         },
         buyTheme({ state, rootGetters, commit, dispatch }, name) {

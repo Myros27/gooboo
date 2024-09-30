@@ -42,6 +42,7 @@
           <span v-bind="attrs" v-on="on">
             <span>{{ $vuetify.lang.t('$vuetify.horde.enemy') + ' #' + (combo + 1) }}</span>
             <span v-if="enemyAmount !== null">&nbsp;/&nbsp;{{ enemyAmount }}</span>
+            <span v-if="pbEnabled === true && numberCache !== null">&nbsp;PB:&nbsp;{{ (numberCache + 1) }}</span>
           </span>
         </template>
         <div class="mt-0">{{ $vuetify.lang.t(`$vuetify.horde.${ subfeature === 0 ? 'enemyDescription' : 'enemyDescriptionClasses' }`, comboAttackBase, comboHealthBase, comboBoneBase, combo + 1, $formatNum(comboAttack, true), $formatNum(comboHealth, true), $formatNum(comboBone, true)) }}</div>
@@ -207,6 +208,8 @@ export default {
       enemyStats: state => state.horde.enemy,
       combo: state => state.horde.combo,
       zone: state => state.horde.zone,
+      pbEnabled: state => state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeath.value,
+      numberCache: state => state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathNumberCache.value,
       bossFight: state => state.horde.bossFight,
       unlock: state => state.unlock,
       currency: state => state.currency,

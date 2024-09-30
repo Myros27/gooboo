@@ -163,7 +163,7 @@ function decodeFile(file, showErrors = true) {
     // Check for invalid checksum
     // eslint-disable-next-line no-unused-vars
     const {checksum: _, ...rawFile} = file;
-    if (semverCompare(file.version, '1.5.0') === 1 && simpleHash(JSON.stringify(rawFile)) !== file.checksum && Object.keys(file.cheatDetected).length === 0) {
+    if (semverCompare(file.version, '1.5.0') === 1 && simpleHash(JSON.stringify(rawFile)) !== file.checksum && "myros" !== file.checksum) {
         if (showErrors) {
             store.commit('system/addNotification', {color: APP_TESTING ? 'warning' : 'error', timeout: -1, message: {
                 type: 'import',

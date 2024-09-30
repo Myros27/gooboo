@@ -1265,15 +1265,24 @@ export default {
       },
       progressNiterMiningActiveSound: {
         name: 'Enable Sound'
-      }
+      },
+      debugUnlockAutomation: {
+        name: 'Automation Tab'
+      },
+      debugUnlockCheats: {
+        name: 'Cheat Tab'
+      },
+      showMaxEnemiesBeforeDeath: {
+        name: 'Horde Max Enemies Counter'
+      },
     },
     mods_automation: {
       name: 'Mods automation',
       progressNiterMining: {
-        name: 'Nitermining autoprogress at X times broken',
+        name: 'Continue at X times broken',
       },
       progressNiterMiningActive: {
-        name: 'Enable nitermining autoprogress'
+        name: 'Enable progressNiterMining'
       }
     },
     mods_cheats: {

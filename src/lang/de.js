@@ -1265,7 +1265,16 @@ export default {
       },
       progressNiterMiningActiveSound: {
         name: 'Enable Sound'
-      }
+      },
+      debugUnlockAutomation: {
+        name: 'Testing Automation Stuff out'
+      },
+      debugUnlockCheats: {
+        name: 'Testing Cheat Stuff out'
+      },
+      showMaxEnemiesBeforeDeath: {
+        name: 'Horde Max Enemies Counter'
+      },
     },
     mods_automation: {
       name: 'Mods automation',
