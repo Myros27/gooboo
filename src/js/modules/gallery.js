@@ -297,7 +297,7 @@ export default {
                 store.dispatch('gallery/switchShape', {fromX: modResult[0][1], fromY: modResult[0][0], toX: modResult[1][1], toY: modResult[1][0]})
             }
 
-            let difference = store.state.currency.gallery_motivation.cap - store.state.system.settings.mods_automation.items.autoShapezActiveEnabled.value && store.state.currency.gallery_motivation.value*2
+            let difference = store.state.currency.gallery_motivation.cap - store.state.currency.gallery_motivation.value*2
 
             difference = Math.max(1, difference);
             difference = Math.min(10, difference);
