@@ -299,6 +299,7 @@ export default {
 
             let difference = store.state.currency.gallery_motivation.cap - store.state.system.settings.mods_automation.items.autoShapezActiveEnabled.value && store.state.currency.gallery_motivation.value*2
 
+            difference = Math.max(1, difference);
             difference = Math.min(10, difference);
 
             for (let i = 0; i < difference; i++) {
