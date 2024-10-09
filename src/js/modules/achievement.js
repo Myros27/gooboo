@@ -14,7 +14,7 @@ export default {
                     if (store.state.system.settings.mods_qol.items.progressNiterMiningSoundCache.value !== store.state.mining.depth){
                         let audio = new Audio('https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3');
                         audio.play();
-                        store.commit('system/registerCheat', {modid: 'autoNiterz', feature: 'mining', name: 'notify:playSound', severity: 0});
+                        //store.commit('system/registerCheat', {modid: 'autoNiterz', feature: 'mining', name: 'notify:playSound', severity: 0}); severity 0 = cheated?
                         store.state.system.settings.mods_qol.items.progressNiterMiningSoundCache.value = store.state.mining.depth
                     }
                 }
@@ -24,7 +24,7 @@ export default {
             if (store.state.horde.zone !== store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathZoneCache.value){
                 store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathZoneCache.value = store.state.horde.zone
                 store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathNumberCache.value = 0
-                store.commit('system/registerCheat', {modid: 'showez', feature: 'horde', name: 'notify:showMaxEnemy', severity: 0});
+                //store.commit('system/registerCheat', {modid: 'showez', feature: 'horde', name: 'notify:showMaxEnemy', severity: 0}); severity 0 = cheated?
             } else {
                 store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathNumberCache.value = Math.max(store.state.horde.combo, store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathNumberCache.value)
             }
