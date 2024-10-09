@@ -52,6 +52,19 @@
         <v-btn class="ma-1" color="primary" target="_blank" href="https://github.com/Tendsty/gooboo"><v-icon class="mr-2">mdi-open-in-new</v-icon>{{ $vuetify.lang.t('$vuetify.info.socials.viewCode') }}</v-btn>
       </v-card-actions>
     </v-card>
+      <v-card class="ma-2">
+        <v-card-title class="justify-center">
+          <span>{{ $vuetify.lang.t('$vuetify.info.modded.title') }}</span>
+        </v-card-title>
+        <v-card-subtitle class="text-center">{{ $vuetify.lang.t('$vuetify.info.modded.subtitle') }}</v-card-subtitle>
+        <v-card-text>
+          <div class="mb-2">{{ $vuetify.lang.t('$vuetify.info.modded.text') }}</div>
+        </v-card-text>
+      <v-card-actions class="flex-wrap justify-end">
+        <v-spacer></v-spacer>
+        <v-btn class="ma-1" color="primary" target="_blank" href="https://github.com/Myros27/gooboo"><v-icon class="mr-2">mdi-open-in-new</v-icon>{{ $vuetify.lang.t('$vuetify.info.socials.viewCode') }}</v-btn>
+      </v-card-actions>
+    </v-card>
     <v-card class="ma-2">
       <v-card-title class="justify-center">{{ $vuetify.lang.t('$vuetify.info.socials.title') }}</v-card-title>
       <v-card-text>{{ $vuetify.lang.t('$vuetify.info.socials.text') }}</v-card-text>

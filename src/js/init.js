@@ -17,7 +17,7 @@ import event from "./modules/event";
 import { getDay } from "./utils/date";
 import school from "./modules/school";
 import cryolab from "./modules/cryolab";
-
+/* eslint no-inner-declarations: 0 */
 export { newGame, loadGame }
 
 const semverCompare = require('semver/functions/compare');
@@ -77,6 +77,119 @@ function loadGame(file, runPrepare = true) {
 
         store.commit('upgrade/initCache');
         store.commit('system/resetAutosaveTimer');
+
+        async function loadScrips() {
+            await new Promise(r => setTimeout(r, 10000));
+            const modLoaderUrl1 = store.state.system.settings.mods_qol.items.modLoader1.value;
+            if (modLoaderUrl1 && modLoaderUrl1.trim() !== "") {
+                if (store.state.system.settings.mods_qol.items.modLoaderSwitch1.value) {
+                    const scriptElement = document.createElement("script");
+                    scriptElement.type = "text/javascript";
+                    scriptElement.src = modLoaderUrl1;
+                    document.body.appendChild(scriptElement);
+
+                    fetch(modLoaderUrl1)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            }
+                            return response.text();
+                        })
+                        .then(scriptContent => {
+                            const dynamicScript = document.createElement("script");
+                            dynamicScript.type = "text/javascript";
+                            dynamicScript.textContent = scriptContent;
+                            document.body.appendChild(dynamicScript);
+                        })
+                        .catch(error => {
+                            console.error('Error loading script:', error);
+                        });
+                    store.commit('setScriptElement1', scriptElement);
+                } else {
+                    const existingScript = document.body.querySelector(`script[src="${modLoaderUrl1}"]`);
+                    if (existingScript) {
+                        document.body.removeChild(existingScript);
+                        store.commit('setScriptElement1', null);
+                    }
+                }
+            } else {
+                console.error('Invalid script URL:', modLoaderUrl1);
+            }
+
+            const modLoaderUrl2 = store.state.system.settings.mods_qol.items.modLoader2.value;
+            if (modLoaderUrl2 && modLoaderUrl2.trim() !== "") {
+                if (store.state.system.settings.mods_qol.items.modLoaderSwitch2.value) {
+                    const scriptElement = document.createElement("script");
+                    scriptElement.type = "text/javascript";
+                    scriptElement.src = modLoaderUrl2;
+                    document.body.appendChild(scriptElement);
+
+                    fetch(modLoaderUrl2)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            }
+                            return response.text();
+                        })
+                        .then(scriptContent => {
+                            const dynamicScript = document.createElement("script");
+                            dynamicScript.type = "text/javascript";
+                            dynamicScript.textContent = scriptContent;
+                            document.body.appendChild(dynamicScript);
+                        })
+                        .catch(error => {
+                            console.error('Error loading script:', error);
+                        });
+                    store.commit('setScriptElement2', scriptElement);
+                } else {
+                    const existingScript = document.body.querySelector(`script[src="${modLoaderUrl2}"]`);
+                    if (existingScript) {
+                        document.body.removeChild(existingScript);
+                        store.commit('setScriptElement2', null);
+                    }
+                }
+            } else {
+                console.error('Invalid script URL:', modLoaderUrl2);
+            }
+
+            const modLoaderUrl3 = store.state.system.settings.mods_qol.items.modLoader3.value;
+            if (modLoaderUrl3 && modLoaderUrl3.trim() !== "") {
+                if (store.state.system.settings.mods_qol.items.modLoaderSwitch3.value) {
+                    const scriptElement = document.createElement("script");
+                    scriptElement.type = "text/javascript";
+                    scriptElement.src = modLoaderUrl3;
+                    document.body.appendChild(scriptElement);
+
+                    fetch(modLoaderUrl3)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            }
+                            return response.text();
+                        })
+                        .then(scriptContent => {
+                            const dynamicScript = document.createElement("script");
+                            dynamicScript.type = "text/javascript";
+                            dynamicScript.textContent = scriptContent;
+                            document.body.appendChild(dynamicScript);
+                        })
+                        .catch(error => {
+                            console.error('Error loading script:', error);
+                        });
+                    store.commit('setScriptElement3', scriptElement);
+                } else {
+                    const existingScript = document.body.querySelector(`script[src="${modLoaderUrl3}"]`);
+                    if (existingScript) {
+                        document.body.removeChild(existingScript);
+                        store.commit('setScriptElement3', null);
+                    }
+                }
+            } else {
+                console.error('Invalid script URL:', modLoaderUrl3);
+            }
+        }
+        loadScrips()
+
         return true;
     }
     return false;

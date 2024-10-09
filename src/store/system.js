@@ -3,6 +3,7 @@ import { tick } from "../js/tick";
 import { randomHex } from "../js/utils/random";
 import seedrandom from "seedrandom";
 import { LOCAL_STORAGE_NAME } from "../js/constants";
+import store from "@/store/index";
 
 export default {
     namespaced: true,
@@ -449,6 +450,51 @@ export default {
                         defaultValue: 0,
                         clearable: true
                     },
+                    modLoader1: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'text',
+                        value: '',
+                        defaultValue: '',
+                        clearable: true
+                    },
+                    modLoaderSwitch1: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
+                    modLoader2: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'text',
+                        value: '',
+                        defaultValue: '',
+                        clearable: true
+                    },
+                    modLoaderSwitch2: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
+                    modLoader3: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'text',
+                        value: '',
+                        defaultValue: '',
+                        clearable: true
+                    },
+                    modLoaderSwitch3: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
                 }
             },
             mods_automation: {
@@ -537,6 +583,9 @@ export default {
         cachePage: {},
         playerId: null,
         playerName: null,
+        scriptElement1: null,
+        scriptElement2: null,
+        scriptElement3: null,
     },
     getters: {
         mainFeatures: (state, getters, rootState) => {
@@ -698,6 +747,15 @@ export default {
                 active: false,
                 completed: false
             });
+        },
+        setScriptElement1(state, scriptElement) {
+            state.scriptElement1 = scriptElement;
+        },
+        setScriptElement2(state, scriptElement) {
+            state.scriptElement2 = scriptElement;
+        },
+        setScriptElement3(state, scriptElement) {
+            state.scriptElement3 = scriptElement;
         },
         updateKey(state, o) {
             Vue.set(state, o.key, o.value);
@@ -995,6 +1053,117 @@ export default {
             }
             if (o.category === 'notification' && o.name === 'cropReady') {
                 dispatch('farm/updateGrownHint', null, {root: true});
+            }
+            if (o.category === 'mods_qol' && o.name === 'modLoaderSwitch1') {
+                const modLoaderUrl = store.state.system.settings.mods_qol.items.modLoader1.value;
+                if (modLoaderUrl && modLoaderUrl.trim() !== "") {
+                    if (store.state.system.settings.mods_qol.items.modLoaderSwitch1.value) {
+                        const scriptElement = document.createElement("script");
+                        scriptElement.type = "text/javascript";
+                        scriptElement.src = modLoaderUrl;
+                        document.body.appendChild(scriptElement);
+
+                        fetch(modLoaderUrl)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! Status: ${response.status}`);
+                                }
+                                return response.text();
+                            })
+                            .then(scriptContent => {
+                                const dynamicScript = document.createElement("script");
+                                dynamicScript.type = "text/javascript";
+                                dynamicScript.textContent = scriptContent;
+                                document.body.appendChild(dynamicScript);
+                            })
+                            .catch(error => {
+                                console.error('Error loading script:', error);
+                            });
+                        commit('setScriptElement1', scriptElement);
+                    } else {
+                        const existingScript = document.body.querySelector(`script[src="${modLoaderUrl}"]`);
+                        if (existingScript) {
+                            document.body.removeChild(existingScript);
+                            commit('setScriptElement1', null);
+                        }
+                    }
+                } else {
+                    console.error('Invalid script URL:', modLoaderUrl);
+                }
+            }
+            if (o.category === 'mods_qol' && o.name === 'modLoaderSwitch2') {
+                const modLoaderUrl = store.state.system.settings.mods_qol.items.modLoader2.value;
+                if (modLoaderUrl && modLoaderUrl.trim() !== "") {
+                    if (store.state.system.settings.mods_qol.items.modLoaderSwitch2.value) {
+                        const scriptElement = document.createElement("script");
+                        scriptElement.type = "text/javascript";
+                        scriptElement.src = modLoaderUrl;
+                        document.body.appendChild(scriptElement);
+
+                        fetch(modLoaderUrl)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! Status: ${response.status}`);
+                                }
+                                return response.text();
+                            })
+                            .then(scriptContent => {
+                                const dynamicScript = document.createElement("script");
+                                dynamicScript.type = "text/javascript";
+                                dynamicScript.textContent = scriptContent;
+                                document.body.appendChild(dynamicScript);
+                            })
+                            .catch(error => {
+                                console.error('Error loading script:', error);
+                            });
+                        commit('setScriptElement2', scriptElement);
+                    } else {
+                        const existingScript = document.body.querySelector(`script[src="${modLoaderUrl}"]`);
+                        if (existingScript) {
+                            document.body.removeChild(existingScript);
+                            commit('setScriptElement2', null);
+                        }
+                    }
+                } else {
+                    console.error('Invalid script URL:', modLoaderUrl);
+                }
+            }
+            if (o.category === 'mods_qol' && o.name === 'modLoaderSwitch3') {
+                const modLoaderUrl = store.state.system.settings.mods_qol.items.modLoader3.value;
+                if (modLoaderUrl && modLoaderUrl.trim() !== "") {
+                    if (store.state.system.settings.mods_qol.items.modLoaderSwitch3.value) {
+                        const scriptElement = document.createElement("script");
+                        scriptElement.type = "text/javascript";
+                        scriptElement.src = modLoaderUrl;
+                        document.body.appendChild(scriptElement);
+
+                        fetch(modLoaderUrl)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! Status: ${response.status}`);
+                                }
+                                return response.text();
+                            })
+                            .then(scriptContent => {
+                                const dynamicScript = document.createElement("script");
+                                dynamicScript.type = "text/javascript";
+                                dynamicScript.textContent = scriptContent;
+                                document.body.appendChild(dynamicScript);
+                            })
+                            .catch(error => {
+                                console.error('Error loading script:', error);
+                            });
+                        commit('setScriptElement3', scriptElement);
+                    } else {
+                        const existingScript = document.body.querySelector(`script[src="${modLoaderUrl}"]`);
+                        if (existingScript) {
+                            document.body.removeChild(existingScript);
+                            commit('setScriptElement3', null);
+                        }
+                    }
+                } else {
+                    console.error('Invalid script URL:', modLoaderUrl);
+                }
             }
         },
         buyTheme({ state, rootGetters, commit, dispatch }, name) {

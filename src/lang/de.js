@@ -324,6 +324,11 @@ export default {
       h: 'Stunde',
       d: 'Tag'
     },
+    modded: {
+      title: 'Mods',
+      subtitle: 'Modded von Myros27',
+      text: 'Die folgenden Mods sind in diesem Release enthalten: AutoShapez, Showez und AutoNiterz, sowie QOL-Mods.',
+    },
     socials: {
       title: 'Kontakte',
       text: 'Gooboo kann alleine und ohne Hilfe von außen gespielt werden. Aber wenn du dich mit anderen Spielern austauschen möchtest, kannst du das hier tun:',
@@ -1274,6 +1279,24 @@ export default {
       },
       showMaxEnemiesBeforeDeath: {
         name: 'Horde Max Enemies Counter'
+      },
+      modLoader1: {
+        name: 'script 1'
+      },
+      modLoaderSwitch1: {
+        name: 'modLoader script 1 aktiv'
+      },
+      modLoader2: {
+        name: 'script 2'
+      },
+      modLoaderSwitch2: {
+        name: 'modLoader script 2 aktiv'
+      },
+      modLoader3: {
+        name: 'script 3'
+      },
+      modLoaderSwitch3: {
+        name: 'modLoader script 3 aktiv'
       },
     },
     mods_automation: {
