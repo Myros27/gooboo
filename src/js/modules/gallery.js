@@ -282,19 +282,30 @@ export default {
                 return [[fromX, fromY], [toX, toY]];
             }
 
-            let modGrid = store.state.gallery.shapeGrid
-            let modMostFrequentElement = findMostCommon(modGrid)
-            let modClick = modShapesTouch(modMostFrequentElement, modGrid)
-            if (modClick !== false){
-                store.dispatch('gallery/clickShape', {x: modClick[1], y: modClick[0]});
-                console.log(`Clicked at ${modClick[0]}, ${modClick[1]} on ${modMostFrequentElement}`);
-                return;
+            function doNextMove(){
+                let modGrid = store.state.gallery.shapeGrid
+                let modMostFrequentElement = findMostCommon(modGrid)
+                let modClick = modShapesTouch(modMostFrequentElement, modGrid)
+                if (modClick !== false){
+                    store.dispatch('gallery/clickShape', {x: modClick[1], y: modClick[0]});
+                    console.log(`Clicked at ${modClick[0]}, ${modClick[1]} on ${modMostFrequentElement}`);
+                    return;
+                }
+                let modOrigin = findClosestShapePosition(modMostFrequentElement, modGrid)
+                let modGoalArea = findConnectedShapes(modMostFrequentElement, modGrid, modOrigin)
+                let modResult = moveClosestNonGoalShapeToGoal(modMostFrequentElement, modGrid, modGoalArea, modOrigin)
+                store.dispatch('gallery/switchShape', {fromX: modResult[0][1], fromY: modResult[0][0], toX: modResult[1][1], toY: modResult[1][0]})
             }
-            let modOrigin = findClosestShapePosition(modMostFrequentElement, modGrid)
-            let modGoalArea = findConnectedShapes(modMostFrequentElement, modGrid, modOrigin)
-            let modResult = moveClosestNonGoalShapeToGoal(modMostFrequentElement, modGrid, modGoalArea, modOrigin)
-            store.dispatch('gallery/switchShape', {fromX: modResult[0][1], fromY: modResult[0][0], toX: modResult[1][1], toY: modResult[1][0]})
-            console.log(`Moved ${modMostFrequentElement} from (${modResult[0][0]}, ${modResult[0][1]}) to (${modResult[1][0]}, ${modResult[1][1]})`);
+
+            let difference = store.state.currency.gallery_motivation.cap - store.state.system.settings.mods_automation.items.autoShapezActiveEnabled.value && store.state.currency.gallery_motivation.value*2
+
+            difference = Math.min(10, difference);
+
+            for (let i = 0; i < difference; i++) {
+                doNextMove()
+            }
+
+
         }
     },
     unlock: ['galleryFeature', 'galleryConversion', 'galleryInspiration', 'galleryAuction', 'galleryDrums', 'galleryShape', 'galleryCanvas'],
