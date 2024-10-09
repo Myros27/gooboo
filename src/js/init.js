@@ -136,7 +136,6 @@ function prepare() {
             }
         }
 
-        // Module init functions
         if (module.init) {
             module.init();
         }
