@@ -288,7 +288,6 @@ export default {
                 let modClick = modShapesTouch(modMostFrequentElement, modGrid)
                 if (modClick !== false){
                     store.dispatch('gallery/clickShape', {x: modClick[1], y: modClick[0]});
-                    console.log(`Clicked at ${modClick[0]}, ${modClick[1]} on ${modMostFrequentElement}`);
                     return;
                 }
                 let modOrigin = findClosestShapePosition(modMostFrequentElement, modGrid)
@@ -297,14 +296,25 @@ export default {
                 store.dispatch('gallery/switchShape', {fromX: modResult[0][1], fromY: modResult[0][0], toX: modResult[1][1], toY: modResult[1][0]})
             }
 
-            let difference = store.state.currency.gallery_motivation.cap - store.state.currency.gallery_motivation.value*2
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            async function someMoreSteps(steps){
+                if (steps > 0){
+                    await sleep(900/steps);
+                    someMoreSteps(steps - 1)
+                    doNextMove()
+                }
+            }
+
+            let difference = (store.state.currency.gallery_motivation.value * 2) - store.state.currency.gallery_motivation.cap
 
             difference = Math.max(1, difference);
             difference = Math.min(10, difference);
 
-            for (let i = 0; i < difference; i++) {
-                doNextMove()
-            }
+            doNextMove()
+            someMoreSteps(difference - 1)
 
 
         }
