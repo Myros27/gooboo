@@ -1283,12 +1283,18 @@ export default {
       },
       progressNiterMiningActive: {
         name: 'Enable progressNiterMining'
+      },
+      autoShapezActive:{
+        name: 'enable autoShapez'
       }
     },
     mods_cheats: {
       name: 'Mods cheats',
       cheatsGo: {
         name: 'TestSwitch',
+      },
+      autoShapezCheatActive:{
+        name: 'enable autoShapez fully'
       }
     }
   },

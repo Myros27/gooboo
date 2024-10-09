@@ -432,7 +432,7 @@ export default {
       return obj;
     },
     shownCheetahStatus() {
-      return Math.max(this.cheetahState, this.cheaterSelfMark);
+      return this.cheaterSelfMark;
     },
     cheetahColor() {
       return this.cheetahColorList[this.shownCheetahStatus] + '-' + (this.$vuetify.theme.dark ? 'lighten2' : 'darken1');
@@ -459,6 +459,16 @@ export default {
     },
     setCheaterSelfMark() {
       this.$store.commit('system/updateKey', {key: 'cheaterSelfMark', value: this.cheaterSelfMark});
+      if (this.cheaterSelfMark >= 100){
+        this.$store.commit('unlock/unlock', 'myros_automation')
+      } else {
+        this.$store.commit('unlock/lock', 'myros_automation')
+      }
+      if (this.cheaterSelfMark >= 200){
+        this.$store.commit('unlock/unlock', 'myros_cheats')
+      } else {
+        this.$store.commit('unlock/lock', 'myros_cheats')
+      }
     }
   }
 }

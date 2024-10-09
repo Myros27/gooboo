@@ -3,7 +3,6 @@ import { tick } from "../js/tick";
 import { randomHex } from "../js/utils/random";
 import seedrandom from "seedrandom";
 import { LOCAL_STORAGE_NAME } from "../js/constants";
-import store from "@/store/index";
 
 export default {
     namespaced: true,
@@ -388,20 +387,6 @@ export default {
             mods_qol: {
                 unlock: null,
                 items: {
-                    debugUnlockAutomation: {
-                        unlock: null,
-                        hasDescription: false,
-                        type: 'switch',
-                        value: false,
-                        defaultValue: false
-                    },
-                    debugUnlockCheats: {
-                        unlock: null,
-                        hasDescription: false,
-                        type: 'switch',
-                        value: false,
-                        defaultValue: false
-                    },
                     progressNiterMiningSound: {
                         unlock: null,
                         hasDescription: false,
@@ -487,6 +472,20 @@ export default {
                         type: 'switch',
                         value: false,
                         defaultValue: false
+                    },
+                    autoShapezActive: {
+                        unlock: 'galleryShape',
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
+                    autoShapezActiveEnabled: {
+                        unlock: 'never',
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
                     }
                 }
             },
@@ -495,6 +494,13 @@ export default {
                 items: {
                     cheatsGo: {
                         unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
+                    autoShapezCheatActive: {
+                        unlock: 'galleryShape',
                         hasDescription: false,
                         type: 'switch',
                         value: false,
@@ -989,20 +995,6 @@ export default {
             }
             if (o.category === 'notification' && o.name === 'cropReady') {
                 dispatch('farm/updateGrownHint', null, {root: true});
-            }
-            if (o.category === 'mods_qol' && o.name === 'debugUnlockAutomation') {
-                if (store.state.system.settings.mods_qol.items.debugUnlockAutomation.value) {
-                    store.commit('unlock/unlock', 'myros_automation')
-                } else {
-                    store.commit('unlock/lock', 'myros_automation')
-                }
-            }
-            if (o.category === 'mods_qol' && o.name === 'debugUnlockCheats') {
-                if (store.state.system.settings.mods_qol.items.debugUnlockCheats.value) {
-                    store.commit('unlock/unlock', 'myros_cheats')
-                } else {
-                    store.commit('unlock/lock', 'myros_cheats')
-                }
             }
         },
         buyTheme({ state, rootGetters, commit, dispatch }, name) {

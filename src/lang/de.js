@@ -1283,12 +1283,18 @@ export default {
       },
       progressNiterMiningActive: {
         name: 'Enable nitermining autoprogress'
+      },
+      autoShapezActive:{
+        name: 'Aktiviere AutoShapez'
       }
     },
     mods_cheats: {
       name: 'Mods cheats',
       cheatsGo: {
         name: 'TestSwitch',
+      },
+      autoShapezCheatActive:{
+        name: 'Aktiviere AutoShapez komplett'
       }
     }
   },

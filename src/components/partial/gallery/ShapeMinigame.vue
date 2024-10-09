@@ -111,6 +111,12 @@
           <price-tag currency="gallery_motivation" :amount="rerollCost"></price-tag>
         </div>
       </gb-tooltip>
+      <div v-if="canUseAutomation && !autoShapezEnabled">
+        <v-btn class="ma-1" width="36" min-width="36" color="primary" @click="enableAutoShapez"><v-icon>mdi-play</v-icon></v-btn>
+      </div>
+      <div v-if="canUseAutomation && autoShapezEnabled">
+        <v-btn class="ma-1" width="36" min-width="36" color="primary" @click="disableAutoShapez"><v-icon>mdi-stop</v-icon></v-btn>
+      </div>
       <currency class="ma-1" name="gallery_motivation" large></currency>
       <gb-tooltip :min-width="0">
         <template v-slot:activator="{ on, attrs }">
@@ -136,6 +142,7 @@ import { GALLERY_MOTIVATION_BUY_AMOUNT, GALLERY_MOTIVATION_BUY_COST, GALLERY_RER
 import Currency from '../../render/Currency.vue';
 import PriceTag from '../../render/PriceTag.vue';
 import StatBreakdown from '../../render/StatBreakdown.vue';
+import unlock from "@/store/unlock";
 
 export default {
   components: { Currency, PriceTag, StatBreakdown },
@@ -144,6 +151,9 @@ export default {
     dragY: null
   }),
   computed: {
+    unlock() {
+      return unlock
+    },
     ...mapState({
       shapeList: state => state.gallery.shape,
       shapeGrid: state => state.gallery.shapeGrid
@@ -183,7 +193,13 @@ export default {
     },
     canBuyMotivation() {
       return this.$store.state.unlock.galleryShape.use && this.$store.getters['currency/value']('gem_sapphire') >= GALLERY_MOTIVATION_BUY_COST && this.$store.getters['currency/value']('gallery_motivation') < 10;
-    }
+    },
+    canUseAutomation(){
+      return this.$store.state.system.settings.mods_automation.items.autoShapezActive.value
+    },
+    autoShapezEnabled(){
+      return this.$store.state.system.settings.mods_automation.items.autoShapezActiveEnabled.value
+    },
   },
   methods: {
     selectTile(x, y) {
@@ -227,6 +243,12 @@ export default {
     },
     buyShapeReroll() {
       this.$store.dispatch('gallery/buyShapeReroll');
+    },
+    enableAutoShapez(){
+      this.$store.state.system.settings.mods_automation.items.autoShapezActiveEnabled.value = true
+    },
+    disableAutoShapez(){
+      this.$store.state.system.settings.mods_automation.items.autoShapezActiveEnabled.value = false
     },
     buyMotivation() {
       if (this.$store.state.system.settings.confirm.items.gem.value) {

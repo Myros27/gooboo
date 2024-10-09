@@ -24,7 +24,7 @@ export default {
             if (store.state.horde.zone !== store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathZoneCache.value){
                 store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathZoneCache.value = store.state.horde.zone
                 store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathNumberCache.value = 0
-                store.commit('system/registerCheat', {modid: 'autoHordez', feature: 'horde', name: 'notify:showMaxEnemy', severity: 0});
+                store.commit('system/registerCheat', {modid: 'showez', feature: 'horde', name: 'notify:showMaxEnemy', severity: 0});
             } else {
                 store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathNumberCache.value = Math.max(store.state.horde.combo, store.state.system.settings.mods_qol.items.showMaxEnemiesBeforeDeathNumberCache.value)
             }
