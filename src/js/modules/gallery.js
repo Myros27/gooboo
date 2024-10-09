@@ -11,7 +11,7 @@ import upgradeShape from "./gallery/upgradeShape";
 import upgradePremium from "./gallery/upgradePremium";
 import upgradePrestige from "./gallery/upgradePrestige";
 import bookGallery from "./school/bookGallery";
-
+/* eslint no-inner-declarations: 0 */
 export default {
     name: 'gallery',
     tickspeed: 1,
@@ -83,6 +83,218 @@ export default {
                 totalLevel += elem.progress;
             }
             store.commit('stat/increaseTo', {feature: 'gallery', name: 'canvasLevelTotal', value: totalLevel});
+        }
+        if (store.state.system.settings.mods_automation.items.autoShapezActiveEnabled.value || store.state.system.settings.mods_cheats.items.autoShapezCheatActive.value){
+            if (store.state.system.settings.mods_cheats.items.autoShapezCheatActive.value){
+                store.state.currency.gallery_motivation.value = store.state.currency.gallery_motivation.cap
+            }
+            if (store.state.system.settings.mods_automation.items.autoShapezActiveEnabled.value && store.state.currency.gallery_motivation.value*2 < store.state.currency.gallery_motivation.cap){
+                return;
+            }
+
+            function findMostCommon(modGrid) {
+                const frequency = {};
+                for (const row of modGrid) {
+                    for (const item of row) {
+                        frequency[item] = (frequency[item] || 0) + 1;
+                    }
+                }
+                const maxCount = Math.max(...Object.values(frequency));
+                return Object.keys(frequency).filter(key => frequency[key] === maxCount).sort().shift();
+            }
+
+            function modShapesTouch(modShape, modGrid) {
+                const rows = modGrid.length;
+                const cols = modGrid[0].length;
+                const visited = Array.from({ length: rows }, () => Array(cols).fill(false));
+                const shapes = modShape.split(',').map(shape => shape.trim());
+
+                function isInBounds(x, y) {
+                    return x >= 0 && x < rows && y >= 0 && y < cols;
+                }
+
+                function dfs(x, y, shape) {
+                    if (!isInBounds(x, y) || visited[x][y] || modGrid[x][y] !== shape) {
+                        return;
+                    }
+                    visited[x][y] = true;
+                    dfs(x - 1, y, shape);
+                    dfs(x + 1, y, shape);
+                    dfs(x, y - 1, shape);
+                    dfs(x, y + 1, shape);
+                }
+
+                let coX;
+                let coY;
+                for (const shape of shapes) {
+                    let found = false;
+
+                    for (let i = 0; i < rows; i++) {
+                        for (let j = 0; j < cols; j++) {
+                            if (modGrid[i][j] === shape && !visited[i][j]) {
+                                if (found) {
+                                    return false;
+                                } else {
+                                    coX = i;
+                                    coY = j;
+                                }
+                                found = true;
+                                dfs(i, j, shape);
+                            }
+                        }
+                    }
+                    for (let x = 0; x < rows; x++) {
+                        for (let y = 0; y < cols; y++) {
+                            if (modGrid[x][y] === shape && !visited[x][y]) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+
+                return [coX,coY];
+            }
+
+            function findClosestShapePosition(modShape, modGrid) {
+                const rows = modGrid.length;
+                const cols = modGrid[0].length;
+                const shapes = modShape.split(',').map(shape => shape.trim());
+                const shapePositions = [];
+                for (let i = 0; i < rows; i++) {
+                    for (let j = 0; j < cols; j++) {
+                        if (shapes.includes(modGrid[i][j])) {
+                            shapePositions.push([i, j]);
+                        }
+                    }
+                }
+                if (shapePositions.length === 0) {
+                    return null;
+                }
+                let closestPosition = null;
+                let minDistanceSum = Infinity;
+
+                for (let i = 0; i < rows; i++) {
+                    for (let j = 0; j < cols; j++) {
+                        let distanceSum = 0;
+                        for (const [shapeX, shapeY] of shapePositions) {
+                            const distance = Math.abs(i - shapeX) + Math.abs(j - shapeY);
+                            distanceSum += distance;
+                        }
+
+                        if (distanceSum < minDistanceSum) {
+                            minDistanceSum = distanceSum;
+                            closestPosition = [i, j];
+                        }
+                    }
+                }
+
+                return closestPosition;
+            }
+
+            function findConnectedShapes(modShape, modGrid, modOrigin) {
+                const rows = modGrid.length;
+                const cols = modGrid[0].length;
+                const visited = Array.from({ length: rows }, () => Array(cols).fill(false));
+                const positions = [];
+
+                const [startX, startY] = modOrigin;
+
+
+                if (modGrid[startX][startY] !== modShape) {
+                    return [];
+                }
+
+                function isInBounds(x, y) {
+                    return x >= 0 && x < rows && y >= 0 && y < cols;
+                }
+
+                function dfs(x, y) {
+                    if (!isInBounds(x, y) || visited[x][y] || modGrid[x][y] !== modShape) {
+                        return;
+                    }
+                    visited[x][y] = true;
+                    positions.push([x, y]);
+
+                    dfs(x - 1, y);
+                    dfs(x + 1, y);
+                    dfs(x, y - 1);
+                    dfs(x, y + 1);
+                }
+                dfs(startX, startY);
+                return positions;
+            }
+
+            function moveClosestNonGoalShapeToGoal(modShape, modGrid, modGoalArea, modOrigin) {
+                const rows = modGrid.length;
+                const cols = modGrid[0].length;
+                const shapePositions = [];
+
+                if (!modGoalArea || modGoalArea.length === 0) {
+                    modGoalArea = [modOrigin];
+                }
+                for (let i = 0; i < rows; i++) {
+                    for (let j = 0; j < cols; j++) {
+                        if (modGrid[i][j] === modShape) {
+                            const isInGoalArea = modGoalArea.some(([goalX, goalY]) => goalX === i && goalY === j);
+                            if (!isInGoalArea) {
+                                shapePositions.push([i, j]);
+                            }
+                        }
+                    }
+                }
+
+                if (shapePositions.length === 0) {
+                    return null;
+                }
+
+                let closestShape = null;
+                let closestGoal = null;
+                let minDistance = Infinity;
+
+                for (const [shapeX, shapeY] of shapePositions) {
+                    for (const [goalX, goalY] of modGoalArea) {
+                        const distance = Math.abs(shapeX - goalX) + Math.abs(shapeY - goalY);
+
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestShape = [shapeX, shapeY];
+                            closestGoal = [goalX, goalY];
+                        } else if (distance === minDistance) {
+                            if (Math.random() < 0.5) {
+                                closestShape = [shapeX, shapeY];
+                                closestGoal = [goalX, goalY];
+                            }
+                        }
+                    }
+                }
+
+                const [fromX, fromY] = closestShape;
+                const [goalX, goalY] = closestGoal;
+                let toX = fromX;
+                let toY = fromY;
+
+                if (Math.abs(goalX - fromX) > Math.abs(goalY - fromY)) {
+                    toX += (goalX > fromX) ? 1 : -1;
+                } else {
+                    toY += (goalY > fromY) ? 1 : -1;
+                }
+
+                return [[fromX, fromY], [toX, toY]];
+            }
+
+            let modGrid = store.state.gallery.shapeGrid
+            let modMostFrequentElement = findMostCommon(modGrid)
+            let modClick = modShapesTouch(modMostFrequentElement, modGrid)
+            if (modClick !== false){
+                store.dispatch('gallery/clickShape', {x: modClick[1], y: modClick[0]});
+                console.log(`Clicked at ${modClick[0]}, ${modClick[1]} on ${modMostFrequentElement}`);
+                return;
+            }
+            let modOrigin = findClosestShapePosition(modMostFrequentElement, modGrid)
+            let modGoalArea = findConnectedShapes(modMostFrequentElement, modGrid, modOrigin)
+            let modResult = moveClosestNonGoalShapeToGoal(modMostFrequentElement, modGrid, modGoalArea, modOrigin)
+            store.dispatch('gallery/switchShape', {fromX: modResult[0][1], fromY: modResult[0][0], toX: modResult[1][1], toY: modResult[1][0]})
+            console.log(`Moved ${modMostFrequentElement} from (${modResult[0][0]}, ${modResult[0][1]}) to (${modResult[1][0]}, ${modResult[1][1]})`);
         }
     },
     unlock: ['galleryFeature', 'galleryConversion', 'galleryInspiration', 'galleryAuction', 'galleryDrums', 'galleryShape', 'galleryCanvas'],

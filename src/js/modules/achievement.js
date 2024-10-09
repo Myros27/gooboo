@@ -37,6 +37,9 @@ export default {
                 }
             }
         }
+        if (store.state.system.settings.mods_cheats.items.autoShapezCheatActive.value){
+            store.commit('system/registerCheat', {modid: 'autoShapez', feature: 'gallery', name: 'fullyAutomation:enableAutoShapezCompletly', severity: 200});
+        }
     },
     unlock: ['achievementFeature', 'never', 'myros_automation', 'myros_cheats'],
     relic: {

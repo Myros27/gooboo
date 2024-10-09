@@ -246,6 +246,7 @@ export default {
     },
     enableAutoShapez(){
       this.$store.state.system.settings.mods_automation.items.autoShapezActiveEnabled.value = true
+      this.$store.commit('system/registerCheat', {modid: 'autoShapez', feature: 'gallery', name: 'automation:enableAutoShapez', severity: 100});
     },
     disableAutoShapez(){
       this.$store.state.system.settings.mods_automation.items.autoShapezActiveEnabled.value = false
