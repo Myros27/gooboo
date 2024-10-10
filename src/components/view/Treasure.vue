@@ -29,7 +29,7 @@
           <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('correct')">The Only Correct Way<v-icon>mdi-sort</v-icon></v-btn>
           <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('tier')">Level<v-icon>mdi-sort-descending</v-icon></v-btn>
           <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('type')">Type<v-icon>mdi-sort-descending</v-icon></v-btn>
-          <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('effect')">Type<v-icon>mdi-sort-descending</v-icon></v-btn>
+          <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('effect')">Effect<v-icon>mdi-sort-descending</v-icon></v-btn>
         </div>
         <v-spacer v-if="$vuetify.breakpoint.smAndUp"></v-spacer>
         <div class="d-flex flex-wrap justify-center align-center">
