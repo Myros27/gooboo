@@ -27,7 +27,7 @@
         </div>
         <div v-if="store.state.system.settings.mods_qol.items.showMoreQOLData.value">
           <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('correct')">The Only Correct Way<v-icon>mdi-sort</v-icon></v-btn>
-          <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('tier')">Level<v-icon>mdi-sort-descending</v-icon></v-btn>
+          <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('tier')">Tier<v-icon>mdi-sort-descending</v-icon></v-btn>
           <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('type')">Type<v-icon>mdi-sort-descending</v-icon></v-btn>
           <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('effect')">Effect<v-icon>mdi-sort-descending</v-icon></v-btn>
         </div>
