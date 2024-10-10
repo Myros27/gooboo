@@ -17,10 +17,10 @@
       <v-icon small class="mr-1" :color="iconColor">mdi-bow-arrow</v-icon>
       <div>{{ $formatNum(item.hunter) }}</div>
       <v-icon :color="iconColor">mdi-circle-small</v-icon>
-      <div v-if="!item.found">???</div>
+      <div v-if="!item.found && !store.state.system.settings.mods_qol.items.showMoreQOLData.value">???</div>
       <div v-else>+{{ $formatNum(currencyIncrease) }} {{ $vuetify.lang.t(`$vuetify.gooboo.multCapacity`, $vuetify.lang.t(`$vuetify.currency.${ item.name }.name`)) }}</div>
     </template>
-    <div v-else-if="!item.found">???</div>
+    <div v-else-if="!item.found && !store.state.system.settings.mods_qol.items.showMoreQOLData.value">???</div>
     <div v-else-if="item.type === 'consumable'">{{ $formatNum(item.value) }}x {{ $vuetify.lang.t(`$vuetify.consumable.${ item.name }.name`) }}</div>
     <div v-else-if="item.type === 'currency'">{{ $formatNum(item.value) }}x {{ $vuetify.lang.t(`$vuetify.currency.${ item.name }.name`) }}</div>
   </div>
@@ -29,6 +29,7 @@
 <script>
 import { capitalize } from '../../../js/utils/format';
 import StatBreakdown from '../../render/StatBreakdown.vue';
+import store from "@/store";
 
 export default {
   components: { StatBreakdown },
@@ -64,6 +65,9 @@ export default {
     }
   },
   computed: {
+    store() {
+      return store
+    },
     dropChance() {
       return this.$store.getters['mult/get'](this.isHunt ? 'farmHuntChance' : 'farmRareDropChance', this.item.chance + this.hunterStacks + this.dropBase, this.dropMult);
     },

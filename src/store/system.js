@@ -388,6 +388,51 @@ export default {
             mods_qol: {
                 unlock: null,
                 items: {
+                    modLoader1: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'text',
+                        value: '',
+                        defaultValue: '',
+                        clearable: true
+                    },
+                    modLoaderSwitch1: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
+                    modLoader2: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'text',
+                        value: '',
+                        defaultValue: '',
+                        clearable: true
+                    },
+                    modLoaderSwitch2: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
+                    modLoader3: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'text',
+                        value: '',
+                        defaultValue: '',
+                        clearable: true
+                    },
+                    modLoaderSwitch3: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
                     progressNiterMiningSound: {
                         unlock: null,
                         hasDescription: false,
@@ -450,45 +495,14 @@ export default {
                         defaultValue: 0,
                         clearable: true
                     },
-                    modLoader1: {
-                        unlock: null,
-                        hasDescription: false,
-                        type: 'text',
-                        value: '',
-                        defaultValue: '',
-                        clearable: true
-                    },
-                    modLoaderSwitch1: {
+                    showMoreQOLData: {
                         unlock: null,
                         hasDescription: false,
                         type: 'switch',
                         value: false,
                         defaultValue: false
                     },
-                    modLoader2: {
-                        unlock: null,
-                        hasDescription: false,
-                        type: 'text',
-                        value: '',
-                        defaultValue: '',
-                        clearable: true
-                    },
-                    modLoaderSwitch2: {
-                        unlock: null,
-                        hasDescription: false,
-                        type: 'switch',
-                        value: false,
-                        defaultValue: false
-                    },
-                    modLoader3: {
-                        unlock: null,
-                        hasDescription: false,
-                        type: 'text',
-                        value: '',
-                        defaultValue: '',
-                        clearable: true
-                    },
-                    modLoaderSwitch3: {
+                    showGooberer: {
                         unlock: null,
                         hasDescription: false,
                         type: 'switch',

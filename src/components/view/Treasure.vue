@@ -25,6 +25,12 @@
             </div>
           </gb-tooltip>
         </div>
+        <div v-if="store.state.system.settings.mods_qol.items.showMoreQOLData.value">
+          <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('correct')">The Only Correct Way<v-icon>mdi-sort</v-icon></v-btn>
+          <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('tier')">Level<v-icon>mdi-sort-descending</v-icon></v-btn>
+          <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('type')">Type<v-icon>mdi-sort-descending</v-icon></v-btn>
+          <v-btn small class="ma-1 pa-1" color="primary" min-width="32" min-height="32" @click="sortBy('effect')">Type<v-icon>mdi-sort-descending</v-icon></v-btn>
+        </div>
         <v-spacer v-if="$vuetify.breakpoint.smAndUp"></v-spacer>
         <div class="d-flex flex-wrap justify-center align-center">
           <item-slot
@@ -83,10 +89,14 @@ import ItemSlot from '../partial/treasure/ItemSlot.vue';
 import StatList from '../partial/treasure/StatList.vue';
 import Currency from '../render/Currency.vue';
 import PriceTag from '../render/PriceTag.vue';
+import store from "@/store";
 
 export default {
   components: { ChanceList, Currency, ItemSlot, StatList, BuyItem, PriceTag },
   computed: {
+    store() {
+      return store
+    },
     ...mapState({
       upgrading: state => state.treasure.upgrading,
       deleting: state => state.treasure.deleting,
@@ -145,6 +155,59 @@ export default {
         }});
       } else {
         this.$store.dispatch('treasure/buyFragments');
+      }
+    },
+    sortBy(sortByThis) {
+
+      function sortObjectWithoutDeletingDuplicates(items, key, customSequence = null) {
+        return items.slice().sort((a, b) => {
+          let aValue = a[key];
+          let bValue = b[key];
+          if (key === "effect" && Array.isArray(aValue)) {
+            aValue = aValue[0];
+          }
+          if (key === "effect" && Array.isArray(bValue)) {
+            bValue = bValue[0];
+          }
+          if (customSequence) {
+            const aIndex = customSequence.indexOf(aValue);
+            const bIndex = customSequence.indexOf(bValue);
+            if (aIndex !== -1 && bIndex !== -1) {
+              return aIndex - bIndex;
+            }
+            if (aIndex !== -1) return -1;
+            if (bIndex !== -1) return 1;
+          }
+          if (typeof aValue === "number" && typeof bValue === "number") {
+            return bValue - aValue;
+          } else if (typeof aValue === "string" && typeof bValue === "string") {
+            return bValue.localeCompare(aValue);
+          }
+          return 0;
+        })
+      }
+
+      switch (sortByThis){
+        case 'type': {
+          store.state.treasure.items = sortObjectWithoutDeletingDuplicates(store.state.treasure.items, 'type', ['ancient', 'empowered', 'dual', 'regular']);
+          break;
+        }
+        case 'tier': {
+          store.state.treasure.items = sortObjectWithoutDeletingDuplicates(store.state.treasure.items, 'tier');
+          break;
+        }
+        case 'effect': {
+          store.state.treasure.items = sortObjectWithoutDeletingDuplicates(store.state.treasure.items, 'effect', ['miningDamage', 'currencyMiningScrapGain', 'miningOreGain', 'miningSmelterySpeed', 'currencyMiningSmokeGain', 'currencyMiningCrystalGreenGain', 'currencyMiningCrystalYellowGain', 'queueSpeedVillageBuilding', 'villageMaterialGain', 'currencyVillageCoinGain', 'villageMentalGain', 'currencyVillageFaithGain', 'currencyVillageSharesGain', 'hordeAttack', 'currencyHordeBoneGain', 'currencyHordeMonsterPartGain', 'hordeItemMasteryGain', 'currencyHordeSoulCorruptedGain', 'currencyFarmVegetableGain', 'currencyFarmBerryGain', 'currencyFarmGrainGain', 'currencyFarmFlowerGain', 'farmExperience', 'currencyGalleryBeautyGain', 'currencyGalleryConverterGain', 'currencyGalleryPackageGain', 'currencyGalleryCashGain']);
+          break;
+        }
+        case 'correct': {
+          store.state.treasure.items = sortObjectWithoutDeletingDuplicates(store.state.treasure.items, 'type', ['ancient', 'empowered', 'dual', 'regular']);
+          store.state.treasure.items = sortObjectWithoutDeletingDuplicates(store.state.treasure.items, 'tier');
+          store.state.treasure.items = sortObjectWithoutDeletingDuplicates(store.state.treasure.items, 'effect', ['miningDamage', 'currencyMiningScrapGain', 'miningOreGain', 'miningSmelterySpeed', 'currencyMiningSmokeGain', 'currencyMiningCrystalGreenGain', 'currencyMiningCrystalYellowGain', 'queueSpeedVillageBuilding', 'villageMaterialGain', 'currencyVillageCoinGain', 'villageMentalGain', 'currencyVillageFaithGain', 'currencyVillageSharesGain', 'hordeAttack', 'currencyHordeBoneGain', 'currencyHordeMonsterPartGain', 'hordeItemMasteryGain', 'currencyHordeSoulCorruptedGain', 'currencyFarmVegetableGain', 'currencyFarmBerryGain', 'currencyFarmGrainGain', 'currencyFarmFlowerGain', 'farmExperience', 'currencyGalleryBeautyGain', 'currencyGalleryConverterGain', 'currencyGalleryPackageGain', 'currencyGalleryCashGain']);
+          break;
+        }
+        default:
+          break;
       }
     },
     toggleUpgrading() {

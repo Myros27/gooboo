@@ -1298,6 +1298,12 @@ export default {
       modLoaderSwitch3: {
         name: 'modLoader script 3 active'
       },
+      showMoreQOLData: {
+        name: 'show additional Data',
+      },
+      showGooberer: {
+        name: 'enable Gooberer',
+      },
     },
     mods_automation: {
       name: 'Mods automation',

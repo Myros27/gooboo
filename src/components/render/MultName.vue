@@ -1,5 +1,5 @@
 <template>
-  <span v-if="isLocked">???</span>
+  <span v-if="isLocked && !store.state.system.settings.mods_qol.items.showMoreQOLData.value">???</span>
   <span v-else-if="isUpgradeCap">{{ $vuetify.lang.t(`$vuetify.upgrade.${upgradeName}`) }} {{ $vuetify.lang.t(`$vuetify.gooboo.maxLevel`) }}</span>
   <span v-else-if="isCurrencyCap">{{ $vuetify.lang.t(`$vuetify.gooboo.multCapacity`, $vuetify.lang.t(`$vuetify.currency.${currencyName}.name`)) }}</span>
   <span v-else-if="isCurrencyGain">{{ $vuetify.lang.t(`$vuetify.gooboo.multGain`, $vuetify.lang.t(`$vuetify.currency.${currencyGainName}.name`)) }}</span>
@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import store from "@/store";
+
 export default {
   props: {
     name: {
@@ -15,6 +17,9 @@ export default {
     }
   },
   computed: {
+    store() {
+      return store
+    },
     isUpgradeCap() {
       return this.$store.getters['mult/isUpgradeCap'](this.name);
     },
