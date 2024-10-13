@@ -8,6 +8,7 @@
   <div class="ma-2 pa-2">
     <div v-if="qol.items.showMoreQOLData.value">
       <v-btn small class="ma-1 pa-1" color="error" min-width="32" min-height="32" @click="toggleIframe"><v-icon>mdi-firefox</v-icon></v-btn>
+      <v-btn v-if="showIframe" id="reloadGooberer" small class="ma-1 pa-1" color="error" min-width="32" min-height="32" @click="refreshIframe"><v-icon>mdi-refresh</v-icon></v-btn>
       <div v-if="showIframe">
         <iframe ref="treasuresIframe" src="https://myros27.github.io/gooberer/1.5/treasure/treasure.html?=test" width="100%" height="900rem" style="border: none;" ></iframe>
       </div>
@@ -64,6 +65,21 @@ export default {
       if (this.showIframe) {
         this.$nextTick(() => {
           const iframe = this.$refs.treasuresIframe;
+          if (iframe && iframe.contentWindow) {
+            iframe.addEventListener('load', () => {
+              const saveFileData = getSavefile();
+              iframe.contentWindow.postMessage(saveFileData, '*');
+            });
+          }
+        });
+      }
+    },
+    refreshIframe() {
+      if (this.showIframe) {
+        this.$nextTick(() => {
+          const iframe = this.$refs.treasuresIframe;
+          let test = iframe.src
+          iframe.src = test
           if (iframe && iframe.contentWindow) {
             iframe.addEventListener('load', () => {
               const saveFileData = getSavefile();

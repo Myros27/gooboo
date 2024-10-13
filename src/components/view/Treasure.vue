@@ -158,7 +158,6 @@ export default {
       }
     },
     sortBy(sortByThis) {
-
       function sortObjectWithoutDeletingDuplicates(items, key, customSequence = null) {
         return items.slice().sort((a, b) => {
           let aValue = a[key];
