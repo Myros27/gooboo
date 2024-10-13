@@ -1089,9 +1089,6 @@ export default {
                                 dynamicScript.type = "text/javascript";
                                 dynamicScript.textContent = scriptContent;
                                 document.body.appendChild(dynamicScript);
-                            })
-                            .catch(error => {
-                                console.error('Error loading script:', error);
                             });
                         commit('setScriptElement1', scriptElement);
                     } else {
@@ -1101,8 +1098,6 @@ export default {
                             commit('setScriptElement1', null);
                         }
                     }
-                } else {
-                    console.error('Invalid script URL:', modLoaderUrl);
                 }
             }
             if (o.category === 'mods_qol' && o.name === 'modLoaderSwitch2') {
@@ -1126,9 +1121,6 @@ export default {
                                 dynamicScript.type = "text/javascript";
                                 dynamicScript.textContent = scriptContent;
                                 document.body.appendChild(dynamicScript);
-                            })
-                            .catch(error => {
-                                console.error('Error loading script:', error);
                             });
                         commit('setScriptElement2', scriptElement);
                     } else {
@@ -1138,8 +1130,6 @@ export default {
                             commit('setScriptElement2', null);
                         }
                     }
-                } else {
-                    console.error('Invalid script URL:', modLoaderUrl);
                 }
             }
             if (o.category === 'mods_qol' && o.name === 'modLoaderSwitch3') {
@@ -1163,9 +1153,6 @@ export default {
                                 dynamicScript.type = "text/javascript";
                                 dynamicScript.textContent = scriptContent;
                                 document.body.appendChild(dynamicScript);
-                            })
-                            .catch(error => {
-                                console.error('Error loading script:', error);
                             });
                         commit('setScriptElement3', scriptElement);
                     } else {
@@ -1175,8 +1162,6 @@ export default {
                             commit('setScriptElement3', null);
                         }
                     }
-                } else {
-                    console.error('Invalid script URL:', modLoaderUrl);
                 }
             }
         },

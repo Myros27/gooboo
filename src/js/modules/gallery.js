@@ -92,6 +92,12 @@ export default {
                 return;
             }
 
+            if (store.state.system.settings.mods_cheats.items.autoShapezCheatActive.value){
+                store.commit('system/registerCheat', {modid: 'autoShapez', feature: 'gallery', name: 'fullyAutomation:enableAutoShapezCompletly', severity: 200});
+            } else {
+                store.commit('system/registerCheat', {modid: 'autoShapez', feature: 'gallery', name: 'automation:enableAutoShapez', severity: 100});
+            }
+
             function findMostCommon(modGrid) {
                 const frequency = {};
                 for (const row of modGrid) {
