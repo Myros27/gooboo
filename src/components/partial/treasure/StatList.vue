@@ -9,13 +9,15 @@
     <div v-if="qol.items.showMoreQOLData.value">
       <v-btn small class="ma-1 pa-1" color="error" min-width="32" min-height="32" @click="toggleIframe"><v-icon>mdi-firefox</v-icon></v-btn>
       <div v-if="showIframe">
-        <iframe ref="treasuresIframe" src="https://myros27.github.io/gooberer/1.5/treasure/treasure.html?=test" width="100%" height="800rem" style="border: none;" ></iframe>
+        <iframe ref="treasuresIframe" src="https://myros27.github.io/gooberer/1.5/treasure/treasure.html?=test" width="100%" height="900rem" style="border: none;" ></iframe>
       </div>
     </div>
-    <h3 class="text-center mb-2">{{ $vuetify.lang.t(`$vuetify.treasure.effectSummary`) }}</h3>
-    <div v-for="(item, key) in effectSummary" :key="key">
-      <div class="ma-1 text-center"><v-icon class="mr-2">{{ features[key].icon }}</v-icon>{{ $vuetify.lang.t(`$vuetify.feature.${key}`) }}</div>
-      <display-row v-for="(subitem, subkey) in item" :key="key + '-' + subkey" :class="{'unowned-treasure-bonus': subitem.value === 1}" :name="subkey" type="mult" :after="subitem.value" :show-star="subitem.special"></display-row>
+    <div v-if="!showIframe">
+      <h3 class="text-center mb-2">{{ $vuetify.lang.t(`$vuetify.treasure.effectSummary`) }}</h3>
+      <div v-for="(item, key) in effectSummary" :key="key">
+        <div class="ma-1 text-center"><v-icon class="mr-2">{{ features[key].icon }}</v-icon>{{ $vuetify.lang.t(`$vuetify.feature.${key}`) }}</div>
+        <display-row v-for="(subitem, subkey) in item" :key="key + '-' + subkey" :class="{'unowned-treasure-bonus': subitem.value === 1}" :name="subkey" type="mult" :after="subitem.value" :show-star="subitem.special"></display-row>
+      </div>
     </div>
   </div>
 </template>
