@@ -19,6 +19,21 @@
     "forge:package": "electron-forge package",
     "forge:make": "electron-forge make"
   },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
   "dependencies": {
     "@fontsource/caveat": "^4.5.9",
     "@fontsource/roboto": "^4.5.8",
@@ -38,8 +53,8 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",
     "@electron-forge/cli": "^6.4.0",
-    "@electron-forge/maker-deb": "^6.4.0",
-    "@electron-forge/maker-rpm": "^6.4.0",
+    "@electron-forge/maker-deb": "^7.5.0",
+    "@electron-forge/maker-rpm": "^7.5.0",
     "@electron-forge/maker-squirrel": "^6.4.0",
     "@electron-forge/maker-zip": "^6.4.0",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.0",
