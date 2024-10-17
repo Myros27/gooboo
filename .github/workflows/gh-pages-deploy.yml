@@ -31,7 +31,7 @@
           run: yarn forge:make --platform=linux
   
         - name: Upload Linux package
-          uses: actions/upload-artifact@v2
+          uses: actions/upload-artifact@v3
           with:
             name: linux-package
             path: out/make
