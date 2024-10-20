@@ -425,7 +425,7 @@
               <v-list-item-title>{{ $vuetify.lang.t('$vuetify.gooboo.saveImport') }}</v-list-item-title>
             </v-list-item>
           </label>
-          <v-list-item @click="changeScreen('importFromCloud')">
+          <v-list-item v-if="cloudEnabled" @click="changeScreen('importFromCloud')">
             <v-list-item-title>{{ $vuetify.lang.t('$vuetify.gooboo.importFromCloud') }}</v-list-item-title>
           </v-list-item>
           <v-list-item @click="changeScreen('resetProgress')">
@@ -602,7 +602,8 @@ export default {
       snackbarPosition: state => state.system.settings.notification.items.position.value,
       cssShadows: state => state.system.settings.performance.items.cssShadows.value,
       goldenDust: state => state.currency.school_goldenDust,
-      updateCheckValue: state => state.system.settings.notification.items.updateCheck.value
+      updateCheckValue: state => state.system.settings.notification.items.updateCheck.value,
+      cloudEnabled: state => state.system.settings.mods_qol.items.enableCloud.value,
     }),
     ...mapGetters({
       mainFeatures: 'system/mainFeatures',

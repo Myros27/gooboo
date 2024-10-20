@@ -164,9 +164,14 @@ export default {
     deleteButton: 'Delete savefile'
   },
   cloudImport: {
-    title: 'Your cloud Saves',
+    title: 'Your cloud saves',
     warning: 'Cloud saves can be deleted at any time or may be corrupted.',
-    loadButton: 'Load Save'
+    loadButton: 'Load Save',
+    ident: 'Identity',
+    os: 'OS',
+    browser: 'Browser',
+    saveTime: 'Save time',
+    loadSave: 'Load Save',
   },
   prestigeDescription: {
     mining_ember: 'Gain ember equal to a percentage of your current dweller depth',

@@ -166,7 +166,12 @@ export default {
   cloudImport: {
     title: 'Deine Spielstände in der Cloud',
     warning: 'Cloud Spielstand können gelöscht werden oder fehlerhaft sein',
-    loadButton: 'Spielstand Laden'
+    loadButton: 'Spielstand Laden',
+    ident: 'Identität',
+    os: 'Betriebsystem',
+    browser: 'Browser',
+    saveTime: 'Speicherzeit',
+    loadSave: 'Lade den Spielstand',
   },
   prestigeDescription: {
     mining_ember: 'Erhalte einen Prozentsatz der Gräbertiefe als Glut',
