@@ -425,6 +425,9 @@
               <v-list-item-title>{{ $vuetify.lang.t('$vuetify.gooboo.saveImport') }}</v-list-item-title>
             </v-list-item>
           </label>
+          <v-list-item @click="changeScreen('importFromCloud')">
+            <v-list-item-title>{{ $vuetify.lang.t('$vuetify.gooboo.importFromCloud') }}</v-list-item-title>
+          </v-list-item>
           <v-list-item @click="changeScreen('resetProgress')">
             <v-list-item-title>{{ $vuetify.lang.t('$vuetify.gooboo.resetProgress') }}</v-list-item-title>
           </v-list-item>
@@ -492,6 +495,7 @@ import FeatureTile from './components/partial/main/FeatureTile.vue';
 import NewGame from './components/view/NewGame.vue';
 import OfflineSummary from './components/view/OfflineSummary.vue';
 import ResetProgress from './components/view/ResetProgress.vue';
+import ImportFromCloud from './components/view/ImportFromCloud.vue';
 import Mining from './components/view/Mining.vue';
 import Info from './components/view/Info.vue';
 import StatOverview from './components/view/StatOverview.vue';
@@ -541,6 +545,7 @@ export default {
     NewGame,
     OfflineSummary,
     ResetProgress,
+    ImportFromCloud,
     Mining,
     Info,
     StatOverview,

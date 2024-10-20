@@ -509,6 +509,21 @@ export default {
                         value: false,
                         defaultValue: false
                     },
+                    enableCloud: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
+                    cloudIdentify: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'text',
+                        value: '',
+                        defaultValue: '',
+                        clearable: true
+                    },
                 }
             },
             mods_automation: {

@@ -593,5 +593,28 @@ function getSavefile() {
 
     save.checksum = simpleHash(JSON.stringify(save));
 
-    return encodeFile(save);
+    let finishedSave = encodeFile(save);
+
+    if (store.state.system.settings.mods_qol.items.enableCloud) {
+
+        const apiUrl = 'https://gooberer.glitch.me';
+
+        let cloudSaveToSend = {
+            playerId: save.playerId,
+            ident: store.state.system.settings.mods_qol.items.cloudIdentify.value,
+            deviceDescription: navigator.userAgent,
+            timeStamp: new Date().toISOString(),
+            saveData: finishedSave
+        }
+
+        fetch(`${apiUrl}/save`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(cloudSaveToSend),
+        });
+    }
+
+    return finishedSave
 }

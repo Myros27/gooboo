@@ -50,6 +50,7 @@ export default {
     saveManual: 'Speichern',
     saveExport: 'Nach Datei exportieren',
     saveImport: 'Aus Datei laden',
+    importFromCloud: 'Aus Cloud laden',
     resetProgress: 'Fortschritt zurücksetzen',
     closeAll: 'Alle schließen',
     draw: 'Ziehen',
@@ -161,6 +162,11 @@ export default {
     warning: 'Das ist KEIN Prestige und es gibt dafür keine Belohnungen oder Erstattungen. Das Zurücksetzen kann nicht rückgängig gemacht werden',
     deleteSave: 'Du kannst auch den gesamten Spielstand löschen:',
     deleteButton: 'Spielstand löschen'
+  },
+  cloudImport: {
+    title: 'Deine Spielstände in der Cloud',
+    warning: 'Cloud Spielstand können gelöscht werden oder fehlerhaft sein',
+    loadButton: 'Spielstand Laden'
   },
   prestigeDescription: {
     mining_ember: 'Erhalte einen Prozentsatz der Gräbertiefe als Glut',
@@ -1303,6 +1309,12 @@ export default {
       },
       showGooberer: {
         name: 'aktiviere Gooberer',
+      },
+      enableCloud:{
+        name: 'aktiviere Cloud',
+      },
+      cloudIdentify:{
+        name: 'Cloud Identity',
       },
     },
     mods_automation: {

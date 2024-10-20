@@ -50,6 +50,7 @@ export default {
     saveManual: 'Save',
     saveExport: 'Export to file',
     saveImport: 'Load from file',
+    importFromCloud: 'Load from cloud',
     resetProgress: 'Reset progress',
     closeAll: 'Close all',
     draw: 'Draw',
@@ -161,6 +162,11 @@ export default {
     warning: 'This is NOT a prestige and there will be no rewards or refunds for doing this. Resets cannot be undone',
     deleteSave: 'You can also delete your entire savefile here:',
     deleteButton: 'Delete savefile'
+  },
+  cloudImport: {
+    title: 'Your cloud Saves',
+    warning: 'Cloud saves can be deleted at any time or may be corrupted.',
+    loadButton: 'Load Save'
   },
   prestigeDescription: {
     mining_ember: 'Gain ember equal to a percentage of your current dweller depth',
@@ -1303,6 +1309,12 @@ export default {
       },
       showGooberer: {
         name: 'enable Gooberer',
+      },
+      enableCloud:{
+        name: 'enable Cloud',
+      },
+      cloudIdentify:{
+        name: 'Cloud Identity',
       },
     },
     mods_automation: {
