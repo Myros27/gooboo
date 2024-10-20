@@ -7,7 +7,10 @@ export default {
         card: {},
         collection: {},
         pack: {},
-        feature: {}
+        feature: {},
+        iframeRefresh: {
+            trigger: false
+        }
     },
     mutations: {
         initCard(state, o) {
@@ -78,6 +81,9 @@ export default {
         },
         updateKey(state, o) {
             Vue.set(state[o.type][o.name], o.key, o.value);
+        },
+        triggerIframeRefresh(state) {
+            state.iframeRefresh.trigger = !state.iframeRefresh.trigger;
         }
     },
     actions: {
@@ -103,6 +109,11 @@ export default {
                 dispatch('currency/spend', {feature: 'gem', name: 'emerald', amount: pack.price * amount}, {root: true});
                 dispatch('openPack', {name: o.name, notify: o.notify, amount});
             }
+            dispatch('triggerIframeRefresh');
+
+        },
+        triggerIframeRefresh({ commit }) {
+            commit('triggerIframeRefresh');
         },
         openPack({ state, rootState, rootGetters, commit, dispatch }, o) {
             const pack = state.pack[o.name];

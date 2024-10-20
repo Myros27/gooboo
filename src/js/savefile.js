@@ -429,10 +429,13 @@ function exportFile(file) {
 
 function getSavefileName() {
     const now = getDay();
+    const time = new Date();
     let year = now.slice(2, 4);
     let month = now.slice(5, 7);
     let day = now.slice(8, 10);
-    return `Gooboo_${ year }${ month }${ day }.txt`;
+    let hour = String(time.getHours()).padStart(2, '0');
+    let minute = String(time.getMinutes()).padStart(2, '0');
+    return `Gooboo_${ year }${ month }${ day }_${ hour }${ minute }.txt`;
 }
 
 function getSavefile() {

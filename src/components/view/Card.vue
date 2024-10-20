@@ -17,7 +17,7 @@
 <template>
   <div :class="$vuetify.breakpoint.mdAndUp ? 'scroll-container' : ''">
     <div class="d-flex align-center ma-1" :class="{'flex-wrap justify-end': $vuetify.breakpoint.xsOnly}">
-      <v-select data-cy="card-pack-selector" class="ma-1" :class="{'w-100': $vuetify.breakpoint.xsOnly}" outlined hide-details :items="pack" item-value="name" v-model="selectedPack" :label="$vuetify.lang.t(`$vuetify.card.cardPack`)">
+      <v-select data-cy="card-pack-selector" class="ma-1" :class="{'w-100': $vuetify.breakpoint.xsOnly}" outlined hide-details :items="pack" item-value="name" v-model="selectedPack" :label="$vuetify.lang.t(`$vuetify.card.cardPack`)" @change="refreshIframe">
         <template v-slot:selection="{ item }"><card-pack :item="item"></card-pack></template>
         <template v-slot:item="{ item }"><card-pack :item="item"></card-pack></template>
       </v-select>
@@ -28,6 +28,10 @@
       <currency class="ma-1" name="card_shinyDust"></currency>
     </div>
     <div class="d-flex flex-wrap ma-1">
+      <div v-if="qol.items.showGooberer.value">
+        <v-btn small class="ma-1 pa-1" color="error" min-width="32" min-height="32" @click="toggleIframe"><v-icon>mdi-firefox</v-icon></v-btn>
+        <v-btn v-if="showIframe" id="reloadGooberer" small class="ma-1 pa-1" color="error" min-width="32" min-height="32" @click="refreshIframe"><v-icon>mdi-refresh</v-icon></v-btn>
+      </div>
       <gb-tooltip v-for="(item, key) in unlockedFeature" :key="`feature-${ key }`" :title-text="$vuetify.lang.t(`$vuetify.feature.${ key }`) + $vuetify.lang.t(`$vuetify.card.cardsSuffix`)">
         <template v-slot:activator="{ on, attrs }">
           <v-chip class="ma-1" v-bind="attrs" v-on="on">
@@ -59,6 +63,11 @@
           </ol>
         </div>
       </alert-text>
+    </div>
+    <div v-if="qol.items.showGooberer.value">
+      <div v-if="showIframe">
+        <iframe ref="cardsIframe" src="https://myros27.github.io/gooberer/1.5/cards/cards.html?=test" width="100%" height="525rem" style="border: none;" ></iframe>
+      </div>
     </div>
     <div class="ma-2">
       <v-expansion-panels accordion>
@@ -98,18 +107,22 @@ import MultStat from '../partial/render/MultStat.vue';
 import DisplayRow from '../partial/upgrade/DisplayRow.vue';
 import Currency from '../render/Currency.vue';
 import MultName from '../render/MultName.vue';
+import {getSavefile} from "@/js/savefile";
 
 export default {
   components: { CardItem, MultStat, CardPack, MultName, DisplayRow, AlertText, Currency },
   data: () => ({
-    selectedPack: null
+    selectedPack: null,
+    showIframe: false
   }),
   computed: {
     ...mapState({
       feature: state => state.card.feature,
       unlock: state => state.unlock,
       packList: state => state.card.pack,
-      stat: state => state.stat
+      stat: state => state.stat,
+      qol: state => state.system.settings.mods_qol,
+      iframeRefreshTrigger: state => state.card.iframeRefresh.trigger
     }),
     collection() {
       let obj = {};
@@ -155,6 +168,11 @@ export default {
       return hasCards && this.stat.mining_prestigeCount.total <= 0 && this.stat.village_prestigeCount.total <= 0 && this.stat.horde_prestigeCount.total <= 0;
     }
   },
+  watch: {
+    iframeRefreshTrigger() {
+      this.refreshIframe();
+    }
+  },
   methods: {
     buyPack(max) {
       if (this.$store.state.system.settings.confirm.items.gem.value) {
@@ -168,7 +186,46 @@ export default {
       } else {
         this.$store.dispatch('card/buyPack', {name: this.selectedPack, notify: true, max});
       }
-    }
+    },
+    toggleIframe() {
+      this.showIframe = !this.showIframe;
+      if (this.showIframe) {
+        this.$nextTick(() => {
+          const iframe = this.$refs.cardsIframe;
+          if (iframe && iframe.contentWindow) {
+            iframe.addEventListener('load', () => {
+              const saveFileData = getSavefile();
+              let sendData = {
+                action: 'initData',
+                save: JSON.parse(atob(saveFileData)),
+                pack: this.selectedPack
+              }
+              iframe.contentWindow.postMessage(btoa(JSON.stringify(sendData)), '*');
+            });
+          }
+        });
+      }
+    },
+    refreshIframe() {
+      if (this.showIframe) {
+        this.$nextTick(() => {
+          const iframe = this.$refs.cardsIframe;
+          let test = iframe.src
+          iframe.src = test
+          if (iframe && iframe.contentWindow) {
+            iframe.addEventListener('load', () => {
+              const saveFileData = getSavefile();
+              let sendData = {
+                action: 'initData',
+                save: JSON.parse(atob(saveFileData)),
+                pack: this.selectedPack
+              }
+              iframe.contentWindow.postMessage(btoa(JSON.stringify(sendData)), '*');
+            });
+          }
+        });
+      }
+    },
   }
 }
 </script>

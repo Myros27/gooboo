@@ -6,7 +6,7 @@
 
 <template>
   <div class="ma-2 pa-2">
-    <div v-if="qol.items.showMoreQOLData.value">
+    <div v-if="qol.items.showGooberer.value">
       <v-btn small class="ma-1 pa-1" color="error" min-width="32" min-height="32" @click="toggleIframe"><v-icon>mdi-firefox</v-icon></v-btn>
       <v-btn v-if="showIframe" id="reloadGooberer" small class="ma-1 pa-1" color="error" min-width="32" min-height="32" @click="refreshIframe"><v-icon>mdi-refresh</v-icon></v-btn>
       <div v-if="showIframe">
@@ -61,14 +61,17 @@ export default {
   methods: {
     toggleIframe() {
       this.showIframe = !this.showIframe;
-
       if (this.showIframe) {
         this.$nextTick(() => {
           const iframe = this.$refs.treasuresIframe;
           if (iframe && iframe.contentWindow) {
             iframe.addEventListener('load', () => {
               const saveFileData = getSavefile();
-              iframe.contentWindow.postMessage(saveFileData, '*');
+              let sendData = {
+                action: 'initData',
+                save: JSON.parse(atob(saveFileData))
+              }
+              iframe.contentWindow.postMessage(btoa(JSON.stringify(sendData)), '*');
             });
           }
         });
@@ -83,7 +86,11 @@ export default {
           if (iframe && iframe.contentWindow) {
             iframe.addEventListener('load', () => {
               const saveFileData = getSavefile();
-              iframe.contentWindow.postMessage(saveFileData, '*');
+              let sendData = {
+                action: 'initData',
+                save: JSON.parse(atob(saveFileData))
+              }
+              iframe.contentWindow.postMessage(btoa(JSON.stringify(sendData)), '*');
             });
           }
         });
