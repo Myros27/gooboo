@@ -59,6 +59,9 @@ new Vue({
     }
 }).$mount('#app')
 
+// eslint-disable-next-line no-undef
+globalThis.store = document.getElementById("app").__vue__.$store
+
 // Duplicate tab check
 const channel = new BroadcastChannel(APP_TESTING ? 'tabtest' : 'tab');
 let isOriginal = true;
