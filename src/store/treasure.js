@@ -128,8 +128,6 @@ export default {
                 level = tierValue % 5;
             }
 
-            document.getElementById("reloadGooberer").click()
-
             return {
                 tier,
                 type: type,
