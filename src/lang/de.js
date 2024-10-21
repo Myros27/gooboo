@@ -1341,7 +1341,10 @@ export default {
       },
       autoShapezCheatActive:{
         name: 'Aktiviere AutoShapez komplett'
-      }
+      },
+      screenReaderTest:{
+        name: 'Aktiviere Screenreader Compatibility'
+      },
     }
   },
   statBreakdown: {

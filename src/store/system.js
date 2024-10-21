@@ -580,7 +580,14 @@ export default {
                         type: 'switch',
                         value: false,
                         defaultValue: false
-                    }
+                    },
+                    screenReaderTest: {
+                        unlock: null,
+                        hasDescription: false,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
+                    },
                 }
             }
         },
