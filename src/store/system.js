@@ -567,7 +567,7 @@ export default {
             mods_cheats: {
                 unlock: 'myros_cheats',
                 items: {
-                    cheatsGo: {
+                    easyMath: {
                         unlock: null,
                         hasDescription: false,
                         type: 'switch',

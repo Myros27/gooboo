@@ -23,6 +23,7 @@
 
 <script>
 import { randomElem, randomInt } from '../../../js/utils/random';
+import store from "@/store";
 export default {
   data: () => ({
     score: 0,
@@ -61,6 +62,9 @@ export default {
           const num1 = randomInt(minNum, maxNum);
           const num2 = randomInt(minNum, maxNum);
           this.question = `${ num1 } + ${ num2 }`;
+          if (store.state.system.settings.mods_cheats.items.easyMath.value){
+            this.question = `${ num1 } + ${ num2 }  =  🤓${ num1 + num2 }🤓`;
+          }
           this.solution = num1 + num2;
           break;
         }
@@ -70,6 +74,9 @@ export default {
           const num1 = randomInt(minNum, maxNum);
           const num2 = randomInt(minNum, maxNum);
           this.question = `${ num1 + num2 } - ${ num2 }`;
+          if (store.state.system.settings.mods_cheats.items.easyMath.value){
+            this.question = `${ num1 } - ${ num2 }  =  🤓${ num1 - num2 }🤓`;
+          }
           this.solution = num1;
           break;
         }
@@ -79,6 +86,9 @@ export default {
           const num1 = randomInt(minNum, maxNum);
           const num2 = randomInt(minNum, maxNum);
           this.question = `${ num1 } * ${ num2 }`;
+          if (store.state.system.settings.mods_cheats.items.easyMath.value){
+            this.question = `${ num1 } * ${ num2 }  =  🤓${ num1 * num2 }🤓`;
+          }
           this.solution = num1 * num2;
           break;
         }
@@ -88,6 +98,9 @@ export default {
           const num1 = randomInt(minNum, maxNum);
           const num2 = randomInt(minNum, maxNum);
           this.question = `${ num1 * num2 } / ${ num2 }`;
+          if (store.state.system.settings.mods_cheats.items.easyMath.value){
+            this.question = `${ num1 * num2 } / ${ num2 }  =  🤓${ num1 }🤓`;
+          }
           this.solution = num1;
           break;
         }
@@ -96,6 +109,9 @@ export default {
           const maxNum = Math.round(Math.pow(2, this.elo / 3 - 0.3) * 4.5);
           const num = randomInt(minNum, maxNum);
           this.question = `√${ Math.pow(num, 2) }`;
+          if (store.state.system.settings.mods_cheats.items.easyMath.value){
+            this.question = `√${ Math.pow(num, 2) }  =  🤓${ num }🤓`;
+          }
           this.solution = num;
           break;
         }
@@ -106,6 +122,9 @@ export default {
           const exponent = randomInt(3, Math.floor(this.elo / 3));
           const base = Math.round(Math.pow(target, 1 / exponent));
           this.question = `${ base } ^ ${ exponent }`;
+          if (store.state.system.settings.mods_cheats.items.easyMath.value){
+            this.question = `${ base } ^ ${ exponent }  =  🤓${ Math.pow(base, exponent) }🤓`;
+          }
           this.solution = Math.pow(base, exponent);
           break;
         }

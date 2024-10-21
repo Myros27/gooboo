@@ -165,7 +165,7 @@ export default {
   },
   cloudImport: {
     title: 'Deine Spielstände in der Cloud',
-    warning: 'Cloud Spielstand können gelöscht werden oder fehlerhaft sein',
+    warning: 'Cloud Spielstand können gelöscht werden oder fehlerhaft sein. Exportiere dein Spiel weiterhin regelmässig.',
     loadButton: 'Spielstand Laden',
     ident: 'Identität',
     os: 'Betriebsystem',
@@ -1336,8 +1336,8 @@ export default {
     },
     mods_cheats: {
       name: 'Mods cheats',
-      cheatsGo: {
-        name: 'TestSwitch',
+      easyMath: {
+        name: 'Einfache Mathematik',
       },
       autoShapezCheatActive:{
         name: 'Aktiviere AutoShapez komplett'

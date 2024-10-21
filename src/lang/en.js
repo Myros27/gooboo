@@ -165,7 +165,7 @@ export default {
   },
   cloudImport: {
     title: 'Your cloud saves',
-    warning: 'Cloud saves can be deleted at any time or may be corrupted.',
+    warning: 'Cloud saves can be deleted at any time or may be corrupted. Export your Saves and have Backups ready for this case',
     loadButton: 'Load Save',
     ident: 'Identity',
     os: 'OS',
@@ -1336,8 +1336,8 @@ export default {
     },
     mods_cheats: {
       name: 'Mods cheats',
-      cheatsGo: {
-        name: 'TestSwitch',
+      easyMath: {
+        name: 'easy Math',
       },
       autoShapezCheatActive:{
         name: 'enable autoShapez fully'
