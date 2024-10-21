@@ -70,7 +70,7 @@ export default {
     delete: 'Löschen',
     convert: 'Umwandeln',
     add: 'Hinzufügen',
-    moddedWarning:'',
+    moddedWarning:'Dies ist eine modifizierte Version. Lies unbedingt die Informationen über die Mods.',
     playedBefore: {
       0: 'Schon mal gespielt? Lade deinen Spielstand ',
       1: 'hier',
@@ -1281,7 +1281,8 @@ export default {
     mods_qol: {
       name: 'Mods QOL',
       progressNiterMiningSound: {
-        name: 'Sound at X times broken'
+        name: 'Sound at X times broken',
+        description: 'Dies dient dazu, ein akustisches Signal zu geben, damit du weisst, dass die gewünschte Tiefe erreicht wurde.'
       },
       progressNiterMiningActiveSound: {
         name: 'Enable Sound'
@@ -1293,37 +1294,45 @@ export default {
         name: 'Testing Cheat Stuff out'
       },
       showMaxEnemiesBeforeDeath: {
-        name: 'Horde Max Enemies Counter'
+        name: 'Horde Max Enemies Counter',
+        description: 'Zeigt die maximale Anzahl der getöteten Feinde an, falls du bei deinem letzten Tod nicht anwesend warst'
       },
       modLoader1: {
-        name: 'script 1'
+        name: 'script 1',
+        description: 'Hier werden andere Mods in das Spiel geladen. Hier geladene Skripte werden mit einer anfänglichen Verzögerung von 10 Sekunden ausgeführt'
       },
       modLoaderSwitch1: {
         name: 'modLoader script 1 aktiv'
       },
       modLoader2: {
-        name: 'script 2'
+        name: 'script 2',
+        description: 'Hier werden andere Mods in das Spiel geladen. Hier geladene Skripte werden mit einer anfänglichen Verzögerung von 10 Sekunden ausgeführt'
       },
       modLoaderSwitch2: {
         name: 'modLoader script 2 aktiv'
       },
       modLoader3: {
-        name: 'script 3'
+        name: 'script 3',
+        description: 'Hier werden andere Mods in das Spiel geladen. Hier geladene Skripte werden mit einer anfänglichen Verzögerung von 10 Sekunden ausgeführt'
       },
       modLoaderSwitch3: {
         name: 'modLoader script 3 aktiv'
       },
       showMoreQOLData: {
         name: 'zeige mehr Daten',
+        description: 'Mehr Daten anzeigen, z.B. für die Farm zeigt er nun auch Drops mit negativen Chancen',
       },
       showGooberer: {
         name: 'aktiviere Gooberer',
+        description: 'Dies aktiviert die Gooberer-Integration und zeigt statische Spieldaten, nützliche Tabellen und Vorhersagen an. Benutzung auf eigene Gefahr',
       },
       enableCloud:{
         name: 'aktiviere Cloud',
+        description: 'Die Cloud-Funktion kann funktionieren, muss aber nicht. Es ist dazu gedacht, dein Speicherstand schnell vom PC auf das Mobiltelefon usw. zu übertragen. Halte immer einen weiteren exportierten Spielstand bereit'
       },
       cloudIdentify:{
         name: 'Cloud Identity',
+        description: 'Ident ist wie ein Benutzername. Es wird verwendet, um deinen Spielstand wiederzufinden. Jeder, der deine Ident kennt, kann mit dieser Spielstände laden und speichern.'
       },
     },
     mods_automation: {

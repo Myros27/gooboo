@@ -41,6 +41,7 @@
         <span :class="$vuetify.breakpoint.smAndDown ? 'text-200p' : 'text-300p'">{{ $vuetify.lang.t('$vuetify.gooboo.newGame') }}</span>
       </v-btn>
     </div>
+    <div class="text-center">{{ $vuetify.lang.t('$vuetify.gooboo.moddedWarning') }}</div>
     <div class="text-center" :class="$vuetify.breakpoint.smAndDown ? '' : 'text-150p'">
       <span>{{ $vuetify.lang.t('$vuetify.gooboo.playedBefore.0') }}</span>
       <label for="gooboo-savefile-input"><a>{{ $vuetify.lang.t('$vuetify.gooboo.playedBefore.1') }}</a></label>

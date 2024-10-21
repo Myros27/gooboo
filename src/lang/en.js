@@ -70,7 +70,7 @@ export default {
     delete: 'Delete',
     convert: 'Convert',
     add: 'Add',
-    moddedWarning:'uwu',
+    moddedWarning:'This is a modified version. Be sure to read the info about the mods.',
     playedBefore: {
       0: 'Already played before? Load your savefile ',
       1: 'here',
@@ -1281,7 +1281,8 @@ export default {
     mods_qol: {
       name: 'Mods QOL',
       progressNiterMiningSound: {
-        name: 'Sound at X times broken'
+        name: 'Sound at X times broken',
+        description: 'This is used to give you an acoustic signal so that you know that the desired depth has been reached.'
       },
       progressNiterMiningActiveSound: {
         name: 'Enable Sound'
@@ -1293,37 +1294,45 @@ export default {
         name: 'Cheat Tab'
       },
       showMaxEnemiesBeforeDeath: {
-        name: 'Horde Max Enemies Counter'
+        name: 'Horde Max Enemies Counter',
+        description: 'show the maximum number of enemies you have killed if you were not here the last time you died'
       },
       modLoader1: {
-        name: 'script 1'
+        name: 'script 1',
+        description: 'This is used to load other mods into the game. Scripts loaded here are executed with an initial delay of 10 seconds'
       },
       modLoaderSwitch1: {
         name: 'modLoader script 1 active'
       },
       modLoader2: {
-        name: 'script 2'
+        name: 'script 2',
+        description: 'This is used to load other mods into the game. Scripts loaded here are executed with an initial delay of 10 seconds'
       },
       modLoaderSwitch2: {
         name: 'modLoader script 2 active'
       },
       modLoader3: {
-        name: 'script 3'
+        name: 'script 3',
+        description: 'This is used to load other mods into the game. Scripts loaded here are executed with an initial delay of 10 seconds'
       },
       modLoaderSwitch3: {
         name: 'modLoader script 3 active'
       },
       showMoreQOLData: {
         name: 'show additional Data',
+        description: 'Show more data, e.g. for the farm also drops with negative chances'
       },
       showGooberer: {
         name: 'enable Gooberer',
+        description: 'This activates the Gooberer integration and displays static match data, useful tables and predictions. Use at your own risk'
       },
       enableCloud:{
         name: 'enable Cloud',
+        description: 'The cloud feature may or may not work. It is intended to quickly move your save from the PC to the cell phone, etc. Always have another exported saves ready'
       },
       cloudIdentify:{
         name: 'Cloud Identity',
+        description: 'Ident is like a username. its used to find your save again. anyone who knows your identifier can load and save with this ident.'
       },
     },
     mods_automation: {

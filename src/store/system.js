@@ -145,8 +145,8 @@ export default {
                         unlock: null,
                         hasDescription: false,
                         type: 'switch',
-                        value: false,
-                        defaultValue: false
+                        value: true,
+                        defaultValue: true
                     },
                     autosaveTimer: {
                         unlock: null,
@@ -197,8 +197,8 @@ export default {
                         unlock: 'farmFeature',
                         hasDescription: true,
                         type: 'switch',
-                        value: false,
-                        defaultValue: false
+                        value: true,
+                        defaultValue: true
                     },
                 }
             },
@@ -234,8 +234,8 @@ export default {
                         hasDescription: false,
                         type: 'number',
                         min: 1,
-                        value: 5,
-                        defaultValue: 5,
+                        value: null,
+                        defaultValue: null,
                         clearable: true
                     },
                     cssShadows: {
@@ -271,8 +271,8 @@ export default {
                         hasDescription: false,
                         type: 'select',
                         items: [0, 1, 2, 3, 4, 5],
-                        value: 3,
-                        defaultValue: 3
+                        value: 5,
+                        defaultValue: 5
                     },
                     autosave: {
                         unlock: null,
@@ -380,8 +380,8 @@ export default {
                         unlock: null,
                         hasDescription: true,
                         type: 'switch',
-                        value: false,
-                        defaultValue: false
+                        value: true,
+                        defaultValue: true
                     }
                 }
             },
@@ -390,7 +390,7 @@ export default {
                 items: {
                     modLoader1: {
                         unlock: null,
-                        hasDescription: false,
+                        hasDescription: true,
                         type: 'text',
                         value: '',
                         defaultValue: '',
@@ -405,7 +405,7 @@ export default {
                     },
                     modLoader2: {
                         unlock: null,
-                        hasDescription: false,
+                        hasDescription: true,
                         type: 'text',
                         value: '',
                         defaultValue: '',
@@ -420,7 +420,7 @@ export default {
                     },
                     modLoader3: {
                         unlock: null,
-                        hasDescription: false,
+                        hasDescription: true,
                         type: 'text',
                         value: '',
                         defaultValue: '',
@@ -435,7 +435,7 @@ export default {
                     },
                     progressNiterMiningSound: {
                         unlock: null,
-                        hasDescription: false,
+                        hasDescription: true,
                         type: 'number',
                         min: 1,
                         max: 1000000,
@@ -466,10 +466,10 @@ export default {
                     },
                     showMaxEnemiesBeforeDeath: {
                         unlock: 'hordeFeature',
-                        hasDescription: false,
+                        hasDescription: true,
                         type: 'switch',
-                        value: false,
-                        defaultValue: false
+                        value: true,
+                        defaultValue: true
                     },
                     showMaxEnemiesBeforeDeathZoneCache: {
                         unlock: 'never',
@@ -497,28 +497,28 @@ export default {
                     },
                     showMoreQOLData: {
                         unlock: null,
-                        hasDescription: false,
+                        hasDescription: true,
                         type: 'switch',
-                        value: false,
-                        defaultValue: false
+                        value: true,
+                        defaultValue: true
                     },
                     showGooberer: {
                         unlock: null,
-                        hasDescription: false,
+                        hasDescription: true,
                         type: 'switch',
-                        value: false,
-                        defaultValue: false
+                        value: true,
+                        defaultValue: true
                     },
                     enableCloud: {
                         unlock: null,
-                        hasDescription: false,
+                        hasDescription: true,
                         type: 'switch',
-                        value: false,
-                        defaultValue: false
+                        value: true,
+                        defaultValue: true
                     },
                     cloudIdentify: {
                         unlock: null,
-                        hasDescription: false,
+                        hasDescription: true,
                         type: 'text',
                         value: '',
                         defaultValue: '',
