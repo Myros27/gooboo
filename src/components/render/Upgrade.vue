@@ -54,7 +54,10 @@
   <v-card v-else>
     <v-card-title class="pa-2 justify-center">
       <v-icon v-if="upgrade.icon" class="mr-2">{{ upgrade.icon }}</v-icon>
-      <div>{{ $vuetify.lang.t(`$vuetify.upgrade.${ name }`) }}</div>
+      <div>
+        {{ $vuetify.lang.t(`$vuetify.upgrade.${ name }`) }}
+        <p v-if="showScreenReader && upgrade.persistent" >Persistent</p>
+      </div>
     </v-card-title>
     <v-card-text class="pb-0">
       <display-row v-for="(item, key) in display" :key="`${item.name}-${item.type}-${key}`" :name="item.name" :type="item.type" :before="item.before" :after="item.after"></display-row>
@@ -188,6 +191,9 @@ export default {
   computed: {
     upgrade() {
       return this.$store.state.upgrade.item[this.name];
+    },
+    showScreenReader(){
+      return this.$store.state.system.settings.mods_cheats.items.screenReaderTest.value ?? false;
     },
     otherUpgrade() {
       if (!this.upgrade.raiseOtherCap) {
