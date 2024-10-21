@@ -70,9 +70,13 @@ export default {
     delete: 'Delete',
     convert: 'Convert',
     add: 'Add',
+    moddedWarning:'uwu',
     playedBefore: {
       0: 'Already played before? Load your savefile ',
-      1: 'here'
+      1: 'here',
+      2: 'Or load it from the cloud ',
+      3: 'here',
+      4: 'Ident',
     },
     offlineSummary: {
       title: 'Welcome back! You have been offline for {0}',
@@ -338,7 +342,7 @@ export default {
     modded: {
       title: 'Mods',
       subtitle: 'Modded by Myros27',
-      text: 'The following mods are included in this release: AutoShapez, Showez and AutoNiterz, as well as QOL-mods.',
+      text: 'The following mods are included in this release: AutoShapez, Showez and AutoNiterz, as well as QOL-mods. Make sure to back up frequently, don\'t rely on the cloud functionality. make sure your save still works on the official version, otherwise get in touch. If you find bugs, try to reproduce them on the official version first before reporting them. for bugs that only occur on this version, feel free to contact me.',
     },
     socials: {
       title: 'Socials',

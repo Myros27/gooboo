@@ -41,6 +41,8 @@ export default {
   },
   methods: {
     async loadWithPlayerId() {
+      // eslint-disable-next-line no-debugger
+      debugger;
       const apiUrl = 'https://gooberer.glitch.me';
       this.resultMessage = 'Loading data, please hold on...';
       try {

@@ -70,9 +70,13 @@ export default {
     delete: 'Löschen',
     convert: 'Umwandeln',
     add: 'Hinzufügen',
+    moddedWarning:'',
     playedBefore: {
       0: 'Schon mal gespielt? Lade deinen Spielstand ',
-      1: 'hier'
+      1: 'hier',
+      2: 'oder lade von der cloud ',
+      3: 'hier',
+      4: 'Identität',
     },
     offlineSummary: {
       title: 'Willkommen zurück! Du warst {0} abwesend',
@@ -338,7 +342,7 @@ export default {
     modded: {
       title: 'Mods',
       subtitle: 'Modded von Myros27',
-      text: 'Die folgenden Mods sind in diesem Release enthalten: AutoShapez, Showez und AutoNiterz, sowie QOL-Mods.',
+      text: 'Die folgenden Mods sind in diesem Release enthalten: AutoShapez, Showez und AutoNiterz, sowie QOL-Mods. Erstelle häufig Sicherungskopien, verlasse dich sich nicht auf die Cloud-Funktionalität. Stelle sicher, dass dein Spielstand noch mit der offiziellen Version funktioniert, andernfalls wende dich an mich. Wenn du Bugs findest, versuche sie zuerst auf der offiziellen Version zu reproduzieren, bevor du die Bugs meldest. Für Bugs, die nur auf dieser Version auftreten, kannst du mich direkt kontaktieren.',
     },
     socials: {
       title: 'Kontakte',

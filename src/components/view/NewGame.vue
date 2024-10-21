@@ -14,6 +14,13 @@
 .text-150p {
   font-size: 150%;
 }
+.text-field-limited {
+  max-width: 400px;
+}
+.text-field-container {
+  display: flex;
+  justify-content: center;
+}
 </style>
 
 <template>
@@ -38,6 +45,13 @@
       <span>{{ $vuetify.lang.t('$vuetify.gooboo.playedBefore.0') }}</span>
       <label for="gooboo-savefile-input"><a>{{ $vuetify.lang.t('$vuetify.gooboo.playedBefore.1') }}</a></label>
     </div>
+    <div class="text-center" :class="$vuetify.breakpoint.smAndDown ? '' : 'text-150p'">
+      <span>{{ $vuetify.lang.t('$vuetify.gooboo.playedBefore.2') }}</span>
+      <a @click="loadPlayerIdAndChangeScreen()">{{ $vuetify.lang.t('$vuetify.gooboo.playedBefore.3') }}</a>
+      <div class="text-field-container">
+        <v-text-field class="ma-1 text-field-limited" :label="$vuetify.lang.t('$vuetify.gooboo.playedBefore.4')" outlined hide-details v-model="identInput"></v-text-field>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -46,12 +60,27 @@ import SettingItem from '../partial/settings/Item.vue';
 
 export default {
   components: { SettingItem },
+  data: () => ({
+    identInput: null,
+  }),
   methods: {
     startNewGame() {
       this.$store.dispatch('system/updateSetting', {category: 'general', name: 'pause', value: false});
       this.$store.commit('system/resetAutosaveTimer');
       this.$store.commit('system/updateKey', {key: 'screen', value: 'mining'});
-    }
+    },
+    async loadPlayerIdAndChangeScreen() {
+      const apiUrl = 'https://gooberer.glitch.me';
+      try {
+        const response = await fetch(`${apiUrl}/getPlayerIdByIdent/${this.identInput}`);
+        const result = await response.json();
+        this.$store.state.system.playerId = result.playerId;
+        this.$store.commit('system/updateKey', {key: 'screen', value: 'importFromCloud'});
+      } catch (error) {
+        console.error('Error fetching saves by playerId:', error);
+      }
+
+    },
   }
 }
 </script>
