@@ -84,7 +84,7 @@
         @mouseover="handleHover"
       >
         <v-icon :color="transparent ? currency.color : undefined" class="mr-2">{{ icon }}</v-icon>
-        <p style="font-size: 2px">{{name}}</p>
+        <p v-if="showScreenReader" style="font-size: 2px">{{$vuetify.lang.t(`$vuetify.currency.${ name }.name`)}}</p>
         <div class="currency-border rounded" :class="{'mt-n1 mb-1': hasLabels}">
           <v-progress-linear
             :background-color="transparent ? undefined : (currency.color + ($vuetify.theme.dark ? ' darken-4' : ' darken-2'))"
@@ -197,6 +197,9 @@ export default {
   computed: {
     currency() {
       return this.$store.state.currency[this.name];
+    },
+    showScreenReader(){
+      return this.$store.state.system.settings.mods_cheats.items.screenReaderTest.value ?? false;
     },
     icon() {
       if (this.$store.state.nightHunt.changedCurrency[this.name] === 'sack') {

@@ -10,6 +10,7 @@
       <v-badge dot overlap bordered :color="curr.color" :value="multWarning">
         <div class="v-chip v-chip--label v-size--small px-2 balloon-text-dynamic" :class="[{'price-tag-highlight': highlight}, $vuetify.theme.dark ? 'theme--dark darken-3' : 'theme--light lighten-3', curr.color, $vnode.data.staticClass]" v-bind="attrs" v-on="on">
           <v-icon size="16" class="mr-2" :aria-label="$vuetify.lang.t(`$vuetify.currency.${ currency }.name`)">{{ curr.icon }}</v-icon>
+          <p v-if="showScreenReader" style="font-size: 2px">{{$vuetify.lang.t(`$vuetify.currency.${ currency }.name`)}}</p>
           <span :class="costClass">{{ (add && amount >= 0) ? '+' : '' }}{{ $formatNum(amount) }}<slot name="suffix"></slot></span>
         </div>
       </v-badge>
@@ -51,6 +52,9 @@ export default {
   computed: {
     curr() {
       return this.$store.state.currency[this.currency];
+    },
+    showScreenReader(){
+      return this.$store.state.system.settings.mods_cheats.items.screenReaderTest.value ?? false;
     },
     stat() {
       return this.$store.state.stat[this.currency];
