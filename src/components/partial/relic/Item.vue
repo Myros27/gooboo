@@ -22,6 +22,9 @@
         v-bind="attrs"
         v-on="on"
       >
+        <div v-if="showScreenReader">
+          <display-row style="font-size: 2px" class="mt-0" v-for="(item, key) in relic.effect" :key="key" :name="item.name" :type="item.type" :after="item.value"></display-row>
+        </div>
         <v-icon :x-large="$vuetify.breakpoint.smAndUp">{{ relic.icon }}</v-icon>
         <div class="text-center" :class="{'relic-name-mobile': $vuetify.breakpoint.xsOnly}">{{ $vuetify.lang.t(`$vuetify.relic.${name}`) }}</div>
         <div class="relic-feature-list d-flex flex-wrap justify-end">
@@ -49,7 +52,9 @@ export default {
   },
   computed: {
     ...mapState({
-      features: state => state.system.features
+      features: state => state.system.features,
+      showScreenReader: state => state.system.settings.mods_cheats.items.screenReaderTest.value,
+
     }),
     relic() {
       return this.$store.state.relic.item[this.name];
