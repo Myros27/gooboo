@@ -27,13 +27,13 @@
 <template>
   <div class="ma-1">
     <div class="d-flex justify-center align-center ma-1">
-      <v-btn icon :disabled="depth <= 1 || isFrozen" @click="depthMin"><v-icon>mdi-skip-backward</v-icon></v-btn>
-      <v-btn icon :disabled="depth <= 1 || isFrozen" @click="depthPrev10"><v-icon>mdi-step-backward-2</v-icon></v-btn>
-      <v-btn icon :disabled="depth <= 1 || isFrozen" @click="depthPrev"><v-icon>mdi-step-backward</v-icon></v-btn>
+      <v-btn icon :disabled="depth <= 1 || isFrozen" @click="depthMin" aria-label="Go back to the Ground (depth 1)"><v-icon>mdi-skip-backward</v-icon></v-btn>
+      <v-btn icon :disabled="depth <= 1 || isFrozen" @click="depthPrev10" aria-label="Go 10 steps up"><v-icon>mdi-step-backward-2</v-icon></v-btn>
+      <v-btn icon :disabled="depth <= 1 || isFrozen" @click="depthPrev" aria-label="Go one step up">><v-icon>mdi-step-backward</v-icon></v-btn>
       <span class="mx-1">{{ depth }}m</span>
-      <v-btn icon :disabled="isDeepest || isFrozen" @click="depthNext"><v-icon>mdi-step-forward</v-icon></v-btn>
-      <v-btn icon :disabled="isDeepest || isFrozen" @click="depthNext10"><v-icon>mdi-step-forward-2</v-icon></v-btn>
-      <v-btn icon :disabled="isDeepest || isFrozen" @click="depthMax"><v-icon>mdi-skip-forward</v-icon></v-btn>
+      <v-btn icon :disabled="isDeepest || isFrozen" @click="depthNext" aria-label="Go one step down"><v-icon>mdi-step-forward</v-icon></v-btn>
+      <v-btn icon :disabled="isDeepest || isFrozen" @click="depthNext10" aria-label="Go 10 steps down">><v-icon>mdi-step-forward-2</v-icon></v-btn>
+      <v-btn icon :disabled="isDeepest || isFrozen" @click="depthMax" aria-label="Go to the maximum depth">><v-icon>mdi-skip-forward</v-icon></v-btn>
     </div>
     <gb-tooltip :title-text="$vuetify.lang.t('$vuetify.mining.durability')">
       <template v-slot:activator="{ on, attrs }">
