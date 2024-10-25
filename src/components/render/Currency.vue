@@ -85,6 +85,7 @@
       >
         <v-icon :color="transparent ? currency.color : undefined" class="mr-2">{{ icon }}</v-icon>
         <p v-if="showScreenReader" style="font-size: 2px">{{$vuetify.lang.t(`$vuetify.currency.${ name }.name`)}}</p>
+        <p v-if="showScreenReader" style="font-size: 2px">You have {{ $formatNum(currency.value) }} of your Possible max {{ finalCap !== null ? (' / ' + $formatNum(finalCap)) : '' }}</p>
         <div class="currency-border rounded" :class="{'mt-n1 mb-1': hasLabels}">
           <v-progress-linear
             :background-color="transparent ? undefined : (currency.color + ($vuetify.theme.dark ? ' darken-4' : ' darken-2'))"
