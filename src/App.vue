@@ -398,12 +398,12 @@
         <div class="text-center">{{ $vuetify.lang.t('$vuetify.endOfContent.description') }}</div>
       </gb-tooltip>
       <v-spacer></v-spacer>
-      <v-btn icon @click="changeScreen('info')">
+      <v-btn aria-label="Information" icon @click="changeScreen('info')">
         <v-icon>mdi-information</v-icon>
       </v-btn>
       <v-menu bottom open-on-hover offset-y>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
+          <v-btn aria-label="Save Menu" icon v-bind="attrs" v-on="on">
             <v-badge :value="backupHint" color="red" overlap dot>
               <v-icon>mdi-content-save</v-icon>
             </v-badge>
@@ -433,7 +433,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-btn data-cy="settings-button" icon @click="changeScreen('settings')">
+      <v-btn aria-label="Settings" data-cy="settings-button" icon @click="changeScreen('settings')">
         <v-icon>mdi-cog</v-icon>
       </v-btn>
     </v-app-bar>
