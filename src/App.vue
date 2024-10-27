@@ -370,10 +370,10 @@
           <div>{{ item }}</div>
         </div>
       </gb-tooltip>
-      <gb-tooltip v-if="canSeeHourglass" aria-label="Ancient hourglass 1" key="ancient-hourglass" :title-text="$vuetify.lang.t('$vuetify.hourglass.title')">
+      <gb-tooltip v-if="canSeeHourglass" key="ancient-hourglass" :title-text="$vuetify.lang.t('$vuetify.hourglass.title')">
         <template v-slot:activator="{ on, attrs }">
-          <div aria-label="Ancient hourglass 2" class="hourglass-container mx-2" @click="openDustDialog" v-bind="attrs" v-on="on">
-            <v-icon aria-label="Ancient hourglass 3" color="secondary" class="hourglass-outline">mdi-timer-sand-full</v-icon>
+          <div class="hourglass-container mx-2" @click="openDustDialog" v-bind="attrs" v-on="on">
+            <v-icon color="secondary" class="hourglass-outline">mdi-timer-sand-full</v-icon>
             <div class="hourglass-bg" :style="`top: ${ hourglassShift }px;`">
               <v-icon color="amber" class="hourglass-bg-inner">mdi-timer-sand-full</v-icon>
             </div>
